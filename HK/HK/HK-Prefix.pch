@@ -1,0 +1,32 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+
+#define BGColor [[UIColor alloc] initWithRed:235/255.0 green:235/255.0 blue:242/255.0 alpha:1]
+#define VBGColor [[UIColor alloc] initWithRed:251/255.0 green:251/255.0 blue:253/255.0 alpha:1]
+#define MYBLUEGColor [[UIColor alloc] initWithRed:75/255.0 green:179/255.0 blue:245/255.0 alpha:1]
+#define BORDERColor [[UIColor alloc] initWithRed:218/255.0 green:218/255.0 blue:218/255.0 alpha:1]
+
+#define kColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define MYREDColor [[UIColor alloc] initWithRed:230/255.0 green:43/255.0 blue:10/255.0 alpha:1]
+#define kFrameW(view) view.frame.size.width
+#define kFrameH(view) view.frame.size.height
+#define kFrameX(view) view.frame.origin.x
+#define kFrameY(view) view.frame.origin.y
+#define kFrameSetRight(view) view.frame.size.width+view.frame.origin.x
+#define kFrameSetBottom(view) view.frame.size.height+view.frame.origin.y

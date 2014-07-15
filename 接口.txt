@@ -1,0 +1,39 @@
+发送短信状态的类型说明：
+1:用户下单时候验证手机号
+2:用户登录验证手机号
+
+获取短信验证码   使用异步请求
+http://www.suishibuy.com/iosapi/getsms
+必要参数
+mobile type（类型就2个  在文本最上面） token
+
+登录接口
+http://www.suishibuy.com/iosapi/login
+必要参数
+mobile code(短信验证码) token
+
+
+下单接口
+http://www.suishibuy.com/iosapi/order
+必填数据参数
+address user_id contacts sex mobile token
+可填数据参数
+remarks
+
+
+订单评论
+http://www.suishibuy.com/iosapi/order/comment
+必要数据
+token order_id content(评论内容 不能为空)
+
+订单评价
+http://www.suishibuy.com/iosapi/order/evaluation
+必要数据
+token order_id evaluation(评价 只能数字 1（好评）或2（差评）)
+
+
+订单列表
+http://www.suishibuy.com/iosapi/order/list
+必要参数
+token mobile  
+只返回50条最新的订单数据  按下单先后顺序从高到低排序
