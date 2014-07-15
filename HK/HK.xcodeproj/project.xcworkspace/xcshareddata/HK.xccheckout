@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C700493A-D77E-42B8-88E6-DD78CFF3B666</string>
+	<string>C3591BC1-953E-4783-A1A8-02AF589A2AFD</string>
 	<key>IDESourceControlProjectName</key>
 	<string>HK</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2B7D22E0-7908-4ED5-9A52-19655C8E5A94</key>
-		<string>https://github.com/linlinOnly/linlinOnly.git</string>
+		<key>C11A890B-87AC-4EE3-B174-57EE0885F71E</key>
+		<string>https://github.com/linlinOnly/OnlyLin.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>HK/HK.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2B7D22E0-7908-4ED5-9A52-19655C8E5A94</key>
+		<key>C11A890B-87AC-4EE3-B174-57EE0885F71E</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/linlinOnly/linlinOnly.git</string>
+	<string>https://github.com/linlinOnly/OnlyLin.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2B7D22E0-7908-4ED5-9A52-19655C8E5A94</string>
+	<string>C11A890B-87AC-4EE3-B174-57EE0885F71E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2B7D22E0-7908-4ED5-9A52-19655C8E5A94</string>
+			<string>C11A890B-87AC-4EE3-B174-57EE0885F71E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>linlinOnly</string>
+			<string>OnlyLin</string>
 		</dict>
 	</array>
 </dict>

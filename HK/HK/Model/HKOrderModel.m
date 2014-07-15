@@ -22,7 +22,6 @@
         _serverTrueName = [[NSString alloc] init];
         _serverType=[[NSString alloc]init];
         _oderType=[[NSString alloc]init];
-        _orderData=[[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -39,7 +38,6 @@
         _serverTrueName = [[NSString alloc] init];
         _serverType=[[NSString alloc]init];
         _oderType=[[NSString alloc]init];
-        _orderData=[[NSMutableArray alloc]init];
         
         _serverDate = date;
         _serverLocal = local;
@@ -140,6 +138,7 @@
     
     [request addPostValue:_serverTrueName forKey:@"contacts"];
     [request addPostValue:_serverTimeLong forKey:@"duration"];
+//    [request addPostValue:_serverTimeLong forKey:@"product_id"];
     [request addPostValue:_serverTel forKey:@"mobile"];
     [request addPostValue:_serverLocal forKey:@"address"];
     [request addPostValue:_serverType forKey:@"service_type"];
@@ -149,6 +148,7 @@
     {
         NSString *date = [[NSString alloc] initWithString:[[self currentDefaultTime] substringToIndex:10]];
         NSString *work_times =  [[NSString alloc] initWithString:[[self currentDefaultTime] substringFromIndex:11]];
+        
         [request addPostValue:date forKey:@"date"];
         [request addPostValue:work_times forKey:@"work_times"];
     }else
@@ -171,7 +171,7 @@
     [request setDelegate:self];
     [request setTag:10011];
 
-    _orderData=;
+
     [request startAsynchronous];
 }
 
@@ -204,10 +204,12 @@
             if (err == nil||jsonDic!= nil) {
                 
                 [_delegate sendOrderFinish:jsonDic];
-                }
+            }
             else
             {
                 [_delegate orderFailed];
+//                [_delegate sendOrderFinish:jsonDic];
+                
                 NSLog(@"error");
             }
         }

@@ -10,6 +10,12 @@
 
 @interface OrderSuccessViewController : UIViewController
 
-@property (nonatomic, strong) id data;
+//@property (nonatomic, strong) id data;
+@property (nonatomic, copy) NSString * servertype;
+@property (nonatomic, copy) NSString * balancedate;
+@property (nonatomic, copy) NSString * orderId;
+@property (nonatomic, copy) NSString * address;
+@property (nonatomic, copy) NSString * name;
+@property (nonatomic, copy) NSString * telphone;
 
 @end

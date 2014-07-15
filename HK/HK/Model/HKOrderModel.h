@@ -27,7 +27,7 @@
 @property (nonatomic,strong) NSString* serverTel;
 @property (nonatomic,strong) NSString* serverType;
 @property (nonatomic,strong) NSString* oderType;
-@property (nonatomic,strong) NSMutableArray * orderData;
+
 
 @property (nonatomic,strong) id<HKOrderModelDelegate> delegate;
 
