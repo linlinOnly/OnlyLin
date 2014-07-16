@@ -81,7 +81,7 @@
     [_bottomScorllView setBackgroundColor:[UIColor whiteColor]];
     [_bottomScorllView setContentSize:CGSizeMake(320, 540)];
     
-    _hourBtn=[[UIButton alloc]initWithFrame:CGRectMake(10, 10, 135, 39)];
+    _hourBtn=[[UIButton alloc]initWithFrame:CGRectMake(20, 10, 135, 39)];
 //    [_hourBtn setTitle:@"小时达" forState:UIControlStateNormal];
     [_hourBtn setImage:[UIImage imageNamed:@"hour"] forState:UIControlStateNormal];
     [_hourBtn setImage:[UIImage imageNamed:@"hour_c"] forState:UIControlStateSelected];
@@ -251,6 +251,8 @@
 
 -(void)submitDataToServer
 {
+    [self sendOrderFinish:nil];
+    return;
     if (![FrontHelper checkLogin]) {
         [self toLoginPage];
         return;
@@ -275,7 +277,7 @@
 
 -(void)sendOrderFinish:(NSDictionary *)dic
 {
-    if ([[dic objectForKey:@"code"] intValue] == 108)
+//    if ([[dic objectForKey:@"code"] intValue] == 108)
     {
         [SVProgressHUD dismissWithSuccess:@"下单成功"];
         _order = [[HKOrderModel alloc] initWithDate:_localView.date local:_localView.tv.text tel:_telView.teltf.text production_id:_timeLongView.serverTimeLong name:_telView.nametf.text serverType:_timeLongView.service_type oderType:_order_type];
@@ -287,10 +289,10 @@
         
     }
     
-    else
-    {
-        [SVProgressHUD dismissWithError:@"下单失败"];
-    }
+//    else
+//    {
+//        [SVProgressHUD dismissWithError:@"下单失败"];
+//    }
 
     
 }
@@ -334,6 +336,7 @@
 -(void)localChange:(NSNotification *)noti
 {
     [_localView.tv setText:[[noti userInfo] objectForKey:@"local"]];
+ 
     
     _isUserSetLocal = true;
     
@@ -362,6 +365,7 @@
         [self reverseGeocodeX:userLocation.location.coordinate.longitude Y:userLocation.location.coordinate.latitude];
         
         //成功后停用
+        mapView.showsUserLocation = NO;
 	}
     
     
@@ -385,6 +389,7 @@
 - (void)mapView:(BMKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
 {
     NSLog(@"location error %@",error.description);
+    
     
     _localView.tv.placeholder = @"定位失败";
 }

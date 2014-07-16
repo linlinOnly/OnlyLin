@@ -29,7 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     self.title = @"订单详情";
     UILabel *customLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     [customLab setTextColor:[UIColor whiteColor]];
@@ -199,10 +199,10 @@
     
     
     UIButton *submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [submitBtn setFrame:CGRectMake(120, kFrameSetBottom(bottomview)+10, 100, 30)];
+    [submitBtn setFrame:CGRectMake(115, kFrameSetBottom(bottomview)+10, 110, 34)];
     [submitBtn addTarget:self action:@selector(submitDataToServer:) forControlEvents:UIControlEventTouchUpInside];
     
-    [submitBtn setBackgroundImage:[UIImage imageNamed:@"order"] forState:UIControlStateNormal];
+    [submitBtn setBackgroundImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
     [self.view addSubview:submitBtn];
     
     

@@ -85,7 +85,7 @@
     _itemModel = [[HKOrderItemModel alloc] init];
     
     //余额视图
-    HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, 10, 300, 40) title:@"账户余额" titleimagename:@"arrow"];
+    HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, 10, 300, 40) title:@"账户余额" titleimagename:@"yuer"];
     [self.view addSubview:balanceview];
     UIImageView * balanceviewright=[[UIImageView alloc]initWithFrame:CGRectMake(270, 8, 25, 25)];
     balanceviewright.image=[UIImage imageNamed:@"arrow"];
@@ -99,7 +99,7 @@
     [balanceview addSubview:_balancelabel];
     
     //家庭住址视图
-    HKRoundCornerView * homeAddressview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(balanceview)+10, 300, 40) title:@"家庭住址" titleimagename:@"arrow"];
+    HKRoundCornerView * homeAddressview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(balanceview)+10, 300, 40) title:@"家庭住址" titleimagename:@"home"];
     [self.view addSubview:homeAddressview];
     UIButton * homeAddressright=[[UIButton alloc]initWithFrame:CGRectMake(270, 8, 25, 25)];
     [homeAddressright setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
@@ -108,7 +108,7 @@
    
     
     //我的订单视图
-    HKRoundCornerView * oderview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(homeAddressview)+10, 300, 40) title:@"我的订单" titleimagename:@"arrow"];
+    HKRoundCornerView * oderview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(homeAddressview)+10, 300, 40) title:@"我的订单" titleimagename:@"orderimage"];
     [self.view addSubview:oderview];
     
     UIButton * oderviewright=[[UIButton alloc]initWithFrame:CGRectMake(270, 8, 25, 25)];

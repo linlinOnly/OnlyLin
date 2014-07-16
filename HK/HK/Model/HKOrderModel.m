@@ -210,8 +210,8 @@
             }
             else
             {
-                [_delegate orderFailed];
-//                [_delegate sendOrderFinish:jsonDic];
+//                [_delegate orderFailed];
+                [_delegate sendOrderFinish:dict];
                 
                 NSLog(@"error");
             }

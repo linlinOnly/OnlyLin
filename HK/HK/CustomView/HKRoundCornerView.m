@@ -86,25 +86,22 @@
     if (self) {
         // Initialization code
         
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 3, 300, 30)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 30)];
         [_titleLabel setText:title];
         
         [_titleLabel setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:14]];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
-        
+        _titleLabel.textColor=kColorFromRGB(0x755833);
         [_titleLabel setTextAlignment:NSTextAlignmentLeft];
         [self addSubview:_titleLabel];
         
         self.backgroundColor = [UIColor whiteColor];
         
-        self.layer.cornerRadius  = 6;
+        self.layer.cornerRadius  = 3;
         
         self.layer.borderColor = BORDERColor.CGColor;
         self.layer.borderWidth = 1;
-        
-        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(_titleLabel), 300, 1)];
-        line.backgroundColor = BGColor;
-//        [self addSubview:line];
+      
         
     }
     return self;

@@ -61,7 +61,7 @@
         [self addSubview:tel];
         
         
-        _nametf = [[UITextField alloc] initWithFrame:CGRectMake(100, 10, 190, 20)];
+        _nametf = [[UITextField alloc] initWithFrame:CGRectMake(100, 12, 190, 20)];
         _nametf.font = [UIFont systemFontOfSize:14];
         _nametf.keyboardType = UIKeyboardTypeDefault;
         _nametf.returnKeyType = UIReturnKeyDone;
@@ -69,7 +69,7 @@
         [_nametf setPlaceholder:@"请填写真实姓名"];
         [self addSubview:_nametf];
         
-        _teltf = [[UITextField alloc] initWithFrame:CGRectMake(100, kFrameSetBottom(line)+10, 190, 20)];
+        _teltf = [[UITextField alloc] initWithFrame:CGRectMake(100, kFrameSetBottom(line)+12, 190, 20)];
         _teltf.keyboardType  = UIKeyboardTypeNamePhonePad;
         _teltf.backgroundColor = [UIColor clearColor];
         _teltf.returnKeyType = UIReturnKeyDone;

@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PayViewController : UIViewController
+#import "PartnerConfig.h"
+#import "DataSigner.h"
+#import "AlixPayResult.h"
+#import "DataVerifier.h"
+#import "AlixPayOrder.h"
+#import "AlixLibService.h"
+
+
+#import "HKLogModel.h"
+
+@interface PayViewController : UIViewController<HKLogModelDelegate>
+//@property (nonatomic,strong) HKOrderDetailInfoModel *model;
+
+@property (nonatomic,strong) HKLogModel *log;
+@property (nonatomic,strong) NSMutableDictionary * dicdata;
 
 @end

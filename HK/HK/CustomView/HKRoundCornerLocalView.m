@@ -35,11 +35,13 @@
         [self addSubview:labeltitle];
         
         
-        _tv = [[UITextField alloc] initWithFrame:CGRectMake(kFrameSetRight(labeltitle)+5, 4, 150, 32)];
+        _tv = [[UITextField alloc] initWithFrame:CGRectMake(kFrameSetRight(labeltitle)+6, 4, 150, 32)];
         _tv.textAlignment = NSTextAlignmentLeft;
         _tv.returnKeyType = UIReturnKeyDone;
         _tv.delegate = self;
-        _tv.font = [UIFont systemFontOfSize:14];
+
+        _tv.adjustsFontSizeToFitWidth = YES;
+        _tv.minimumFontSize = 5;
         _tv.textColor=[UIColor blackColor];
         _tv.placeholder = @"自动定位中...";
         [self addSubview:_tv];
@@ -68,12 +70,11 @@
         [self addSubview:labeltitle2];
         
         
-        _btn2 = [[UIButton alloc] initWithFrame:CGRectMake(kFrameSetRight(labeltitle)+5, kFrameSetBottom(line)+4, 150, 32)];
+        _btn2 = [[UIButton alloc] initWithFrame:CGRectMake(kFrameSetRight(labeltitle)+5, kFrameSetBottom(line)+5, 150, 32)];
         [_btn2.titleLabel setFont:[UIFont systemFontOfSize:14]];
-        [_btn2.titleLabel setTextAlignment:NSTextAlignmentLeft];
-//        [_btn2 setBackgroundColor:[UIColor redColor]];
+        _btn2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_btn2 setTitle:@"请选择服务时间" forState:UIControlStateNormal];
-        [_btn2.titleLabel setTextColor:[UIColor blackColor]];
+        [_btn2.titleLabel setTextColor:[UIColor lightGrayColor]];
         [_btn2 addTarget:self action:@selector(checkTime) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btn2];
         
@@ -132,7 +133,7 @@
 
 -(void)checkTime
 {
-    [_btn2.titleLabel setTextColor:[UIColor blackColor]];
+//    [_btn2.titleLabel setTextColor:[UIColor blackColor]];
     [_actionSheet showInView:self];
 }
 
@@ -146,7 +147,14 @@
 
 -(void)cancle
 {
-    [_btn2.titleLabel setTextColor:[UIColor blackColor]];
+    if ([_btn2.titleLabel.text isEqualToString:@"请选择服务时间"])
+    {
+        [_btn2.titleLabel setTextColor:[UIColor lightGrayColor]];
+    }else
+    {
+        [_btn2.titleLabel setTextColor:[UIColor blackColor]];
+    }
+    
 }
 
 
