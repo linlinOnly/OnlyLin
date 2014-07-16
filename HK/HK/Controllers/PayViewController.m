@@ -1,19 +1,14 @@
 //
-//  OrderSuccessViewController.m
+//  PayViewController.m
 //  HK
 //
-//  Created by QiMengJin on 14-7-15.
+//  Created by panyulin－cyou on 14-7-16.
 //  Copyright (c) 2014年 马 涛. All rights reserved.
 //
 
-#import "OrderSuccessViewController.h"
-
-@interface OrderSuccessViewController ()
-
-@end
-
-@implementation OrderSuccessViewController
-
+#import "PayViewController.h"
+#import "HKRoundCornerView.h"
+@implementation PayViewController
 - (id)init
 {
     self = [super init];
@@ -24,12 +19,11 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = @"订单详情";
+    self.title = @"支付方式";
     UILabel *customLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     [customLab setTextColor:[UIColor whiteColor]];
     customLab.backgroundColor = [UIColor clearColor];
@@ -44,34 +38,33 @@
     [backBtn addTarget:self action:@selector(returnView) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setImage:backImage forState:UIControlStateNormal];
     UIBarButtonItem *backItem=[[UIBarButtonItem alloc]initWithCustomView:backBtn];
-    
     self.navigationItem.leftBarButtonItem = backItem;
     
-//    NSLog(@"订单信息:%@",_data);
+    //余额视图
+    HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, 10, 300, 40) title:@"账户余额"];
+    [self.view addSubview:balanceview];
+
+    
+    //上门收费
+    HKRoundCornerView * payview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10,kFrameSetBottom(balanceview)+10, 300, 40) title:@"上门收费"];
+    [self.view addSubview:payview];
+    
+    //上门收费
+    HKRoundCornerView * netPayview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(payview)+10, 300, 40) title:@"网上支付"];
+    [self.view addSubview:netPayview];
+    
+    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, 300, 1)];
+    line.backgroundColor = BGColor;
+    [netPayview addSubview:line];
+
+    
     
     
 }
+
 -(void)returnView
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -275,23 +275,14 @@
 
 -(void)sendOrderFinish:(NSDictionary *)dic
 {
-    if ([[dic objectForKey:@"code"] intValue] == 108) {
+    if ([[dic objectForKey:@"code"] intValue] == 108)
+    {
         [SVProgressHUD dismissWithSuccess:@"下单成功"];
         _order = [[HKOrderModel alloc] initWithDate:_localView.date local:_localView.tv.text tel:_telView.teltf.text production_id:_timeLongView.serverTimeLong name:_telView.nametf.text serverType:_timeLongView.service_type oderType:_order_type];
         
         OrderSuccessViewController * ordersuccessview=[OrderSuccessViewController alloc];
-        ordersuccessview.servertype=[_order_type isEqualToString:@"1"]?@"双人组合":@"单人组合";
-        ordersuccessview.balancedate=_localView.date;
-        //要修改
-        ordersuccessview.orderId=@"sadasd";
-        ordersuccessview.address=_localView.tv.text;
-        ordersuccessview.name=_telView.nametf.text;
-        ordersuccessview.telphone=_telView.teltf.text;
-        
-        
-        
+        ordersuccessview.data=[dic objectForKey:@"order"];
         ordersuccessview = [ordersuccessview init];
-        
         [self.navigationController pushViewController:ordersuccessview animated:YES];
         
     }
@@ -300,7 +291,7 @@
     {
         [SVProgressHUD dismissWithError:@"下单失败"];
     }
-  
+
     
 }
 

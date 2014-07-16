@@ -7,7 +7,7 @@
 //
 
 #import "HKOrderModel.h"
-
+#import "SBJsonParser.h"
 @implementation HKOrderModel
 
 -(id)init
@@ -105,7 +105,7 @@
 }
 #pragma mark - 默认格式 - 当前时间 - @"yyyy-MM-dd HH:mm"
 - (NSString *)currentDefaultTime {
-    return [self forMatter:@"yyyy-MM-dd HH:mm" date:[[NSDate date]dateByAddingTimeInterval:3600]];
+    return [self forMatter:@"yyyy-MM-dd HH" date:[[NSDate date]dateByAddingTimeInterval:3600]];
 }
 #pragma mark - 自定义格式 将 时间 转换 字符串
 - (NSString *)forMatter:(NSString *)matter date:(NSDate *)date {
@@ -115,9 +115,9 @@
 
 -(void)sendPostToServer
 {
-    if (![self checkData]) {
-        return;
-    }
+//    if (![self checkData]) {
+//        return;
+//    }
     
     if ([FrontHelper getNetStatus] == 0) {
         [SVProgressHUD showErrorWithStatus_custom:@"无网络连接" duration:1.0];
@@ -138,7 +138,7 @@
     
     [request addPostValue:_serverTrueName forKey:@"contacts"];
     [request addPostValue:_serverTimeLong forKey:@"duration"];
-//    [request addPostValue:_serverTimeLong forKey:@"product_id"];
+    [request addPostValue:_serverTimeLong forKey:@"product_id"];
     [request addPostValue:_serverTel forKey:@"mobile"];
     [request addPostValue:_serverLocal forKey:@"address"];
     [request addPostValue:_serverType forKey:@"service_type"];
@@ -147,15 +147,14 @@
     if([_oderType isEqualToString:@"1"])
     {
         NSString *date = [[NSString alloc] initWithString:[[self currentDefaultTime] substringToIndex:10]];
-        NSString *work_times =  [[NSString alloc] initWithString:[[self currentDefaultTime] substringFromIndex:11]];
-        
+        NSString *work_times = [NSString stringWithFormat:@"%@:00",[[self currentDefaultTime] substringFromIndex:11]];
         [request addPostValue:date forKey:@"date"];
         [request addPostValue:work_times forKey:@"work_times"];
     }else
     {
 
         NSString *date = [[NSString alloc] initWithString:[_serverDate substringToIndex:10]];
-        NSString *work_times =  [[NSString alloc] initWithString:[_serverDate substringFromIndex:11]];
+        NSString *work_times =  [[NSString alloc] initWithString:[[self currentDefaultTime] substringFromIndex:11]];
         [request addPostValue:date forKey:@"date"];
         [request addPostValue:work_times forKey:@"work_times"];
     }
@@ -199,11 +198,15 @@
     
     if ([_delegate respondsToSelector:@selector(sendOrderFinish:)]) {
     
+        SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
+        NSMutableDictionary *dict = [jsonParser objectWithString:request.responseString];
+        NSLog(@"%@",dict);
+        
         NSError *err;
-        NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingAllowFragments error:&err];
-            if (err == nil||jsonDic!= nil) {
+//        NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingAllowFragments error:&err];
+            if (err == nil||dict!= nil) {
                 
-                [_delegate sendOrderFinish:jsonDic];
+                [_delegate sendOrderFinish:dict];
             }
             else
             {
