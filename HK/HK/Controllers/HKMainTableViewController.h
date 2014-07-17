@@ -24,9 +24,10 @@
 #import "ASIFormDataRequest.h"
 #import "SVProgressHUD.h"
 
+
 @interface HKMainTableViewController : UIViewController<HKOrderListModelDelegate,HKOrderDetailModelDelegate>
 @property (nonatomic,strong) UIBarButtonItem *rightButton;
-@property (nonatomic,strong) NSArray *orderList;
+@property (nonatomic,strong) NSMutableArray*orderList;
 @property (nonatomic,strong) HKOrderListModel *listModel;
 @property (nonatomic,strong) HKOrderItemModel *itemModel;
 @property (nonatomic,strong) HKorderDetailTableController  *detailVC;
@@ -35,4 +36,5 @@
 @property (nonatomic,strong) UITextField * addressTfd;
 @property (nonatomic,strong) UIScrollView *bottomScorllView;
 @property (nonatomic, assign) int bottomheight_int;
+
 @end

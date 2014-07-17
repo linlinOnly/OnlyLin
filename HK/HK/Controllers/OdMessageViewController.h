@@ -8,5 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "HKLogModel.h"
+#import "OrderData.h"
 @interface OdMessageViewController : UIViewController
+@property (nonatomic,strong) UIScrollView *bottomScorllView;
+@property (nonatomic,strong) OrderData * data;
 @end

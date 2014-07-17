@@ -8,6 +8,8 @@
 
 #import "HKMainTableViewController.h"
 #import "HKNavigationController.h"
+#import "OrderData.h"
+#import "OdMessageViewController.h"
 @interface HKMainTableViewController ()
 
 @end
@@ -74,7 +76,7 @@
 //        [self.navigationController pushViewController:loginController animated:YES];
 //    }
     
-    _orderList = [[NSArray alloc] init];
+    _orderList = [[NSMutableArray alloc] init];
     [super viewDidLoad];
     
     _listModel = [[HKOrderListModel alloc] init];
@@ -243,7 +245,7 @@
 {
 //    NSLog(@"orderList %@",dic);
 }
--(void)addOrderListView:(NSDictionary*)dic
+-(void)addOrderListView:(OrderData*)orderdata index:(int)index
 {
     HKRoundCornerView * oderview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, _bottomheight_int , 300, 170) cornerRadius:2];
     [_bottomScorllView addSubview:oderview];
@@ -258,7 +260,7 @@
     UILabel *label1r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,10, 160, 12)];
     label1r.textColor=kColorFromRGB(0x333333);
     label1r.font=[UIFont systemFontOfSize:9];
-    label1r.text=[NSString stringWithFormat:@"%@  %@",[dic objectForKey:@"date"],[dic objectForKey:@"work_times"]];
+    label1r.text=orderdata.create_time;
     [oderview addSubview:label1r];
     
     
@@ -271,7 +273,7 @@
     UILabel *label2r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label1)+8, 160, 12)];
     label2r.textColor=kColorFromRGB(0x666666);
     label2r.font=[UIFont systemFontOfSize:9];
-    label2r.text=[dic valueForKey:@"order_sn"];
+    label2r.text=orderdata.order_sn;
     [oderview addSubview:label2r];
     
     UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label2)+8, 52, 12)];
@@ -283,7 +285,7 @@
     UILabel *label3r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label2)+8, 160, 12)];
     label3r.textColor=kColorFromRGB(0x666666);
     label3r.font=[UIFont systemFontOfSize:9];
-    label3r.text=[NSString stringWithFormat:@"¥%@",[dic objectForKey:@"total_fee"]];
+    label3r.text=orderdata.total_fee;
     [oderview addSubview:label3r];
     
     UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label3)+8, 52, 12)];
@@ -295,7 +297,7 @@
     UILabel *label4r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label3)+8, 160, 12)];
     label4r.textColor=kColorFromRGB(0x666666);
     label4r.font=[UIFont systemFontOfSize:9];
-    label4r.text=[[NSString stringWithFormat:@"%@",[dic objectForKey:@"order_type"]] isEqualToString:@"1"]?@"预约订单":@"小时达订单";
+    label4r.text=orderdata.order_type;
     [oderview addSubview:label4r];
     
     UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label4)+8, 52, 12)];
@@ -307,17 +309,17 @@
     UILabel *label5r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label4)+8, 160, 12)];
     label5r.textColor=kColorFromRGB(0x666666);
     label5r.font=[UIFont systemFontOfSize:9];
-    label5r.text=[[NSString stringWithFormat:@"%@",[dic objectForKey:@"order_status"]] isEqualToString:@"1"]?@"已派送":@"已完成";
+    label5r.text=orderdata.order_status;
     [oderview addSubview:label5r];
 
     UIImageView * imageview=[[UIImageView alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label5)+8, 12, 12)];
-    imageview.image=[UIImage imageNamed:@""];
+    imageview.image=[UIImage imageNamed:@"local"];
     [oderview addSubview:imageview];
     
-    UILabel *label6=[[UILabel alloc]initWithFrame:CGRectMake(30,kFrameSetBottom(label5)+8, 300, 12)];
+    UILabel *label6=[[UILabel alloc]initWithFrame:CGRectMake(26,kFrameSetBottom(label5)+8, 300, 12)];
     label6.textColor=kColorFromRGB(0x666666);
     label6.font=[UIFont systemFontOfSize:11];
-    label6.text=[dic objectForKey:@"address"];
+    label6.text=orderdata.address;
     [oderview addSubview:label6];
     
     UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label6)+10, 300, 0.3)];
@@ -325,9 +327,59 @@
     line.alpha=0.2;
     [oderview addSubview:line];
     
+    
+    UIButton * orderMessage = [[UIButton alloc] initWithFrame:CGRectMake(15, kFrameSetBottom(line)+4, 90, 30)];
+    [orderMessage setTitle:@"订单详情" forState:UIControlStateNormal];
+    [orderMessage.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [orderMessage setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+    [orderMessage addTarget:self action:@selector(orderMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
+    orderMessage.tag=index;
+    [oderview addSubview:orderMessage];
+    
+    UIButton * tryagain = [[UIButton alloc] initWithFrame:CGRectMake(105, kFrameSetBottom(line)+4, 90, 30)];
+    [tryagain setTitle:@"再来一次" forState:UIControlStateNormal];
+    [tryagain.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [tryagain setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+    [tryagain addTarget:self action:@selector(tryagainBtn:) forControlEvents:UIControlEventTouchUpInside];
+    tryagain.tag=index;
+    [oderview addSubview:tryagain];
+    
+    UIButton * pingjia = [[UIButton alloc] initWithFrame:CGRectMake(195, kFrameSetBottom(line)+4, 90, 30)];
+    [pingjia setTitle:@"服务评价" forState:UIControlStateNormal];
+    [pingjia.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [pingjia setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+    [pingjia addTarget:self action:@selector(pingjiaBtn:) forControlEvents:UIControlEventTouchUpInside];
+    pingjia.tag=index;
+    [oderview addSubview:pingjia];
+    
+//    UIButton * payBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, kFrameSetBottom(line)+4, 100, 30)];
+////    [payBtn setTitle:@"订单详情" forState:UIControlStateNormal];
+//    [payBtn setImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
+//    [payBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+//    [payBtn setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+//    [payBtn addTarget:self action:@selector(orderMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    payBtn.tag=index;
+//    [oderview addSubview:payBtn];
+    
+    
     [_bottomScorllView setContentSize:CGSizeMake(kFrameW(_bottomScorllView), kFrameSetBottom(oderview)+10)];
 }
-
+-(void)orderMessageBtn:(UIButton*)btn
+{
+    //点击订单详情
+    OdMessageViewController * messageview=[OdMessageViewController alloc];
+    messageview.data=[_orderList objectAtIndex:btn.tag];
+    [messageview init];
+    [self.navigationController pushViewController:messageview animated:YES];
+}
+-(void)tryagainBtn:(UIButton*)btn
+{
+    //点击再来一次
+}
+-(void)pingjiaBtn:(UIButton*)btn
+{
+    //点击服务评价
+}
 -(void)sendOrderListFinish:(NSDictionary *)dic
 {
     
@@ -336,13 +388,14 @@
     }
     else
     {
-        _orderList = [dic objectForKey:@"order_list"];
-        for (int i=0; i<_orderList.count; i++)
+        NSArray * list = [dic objectForKey:@"order_list"];
+        for (int i=0; i<list.count; i++)
         {
-            [self addOrderListView:[_orderList objectAtIndex:i]];
+            OrderData * orderdata=[OrderData itemFormDic:[list objectAtIndex:i]];
+            [_orderList addObject:orderdata];
+            [self addOrderListView:orderdata index:i];
+            
         }
-        
-        
         
         [SVProgressHUD dismiss];
         

@@ -168,6 +168,7 @@
 		F0842106197039AC007CC439 /* telphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0842101197039AC007CC439 /* telphone@2x.png */; };
 		F084210819703BE5007CC439 /* townpeople@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F084210719703BE5007CC439 /* townpeople@2x.png */; };
 		F084210A19703DA1007CC439 /* bar_telphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F084210919703DA1007CC439 /* bar_telphone@2x.png */; };
+		F0CB9D8D197807C600AAC2B1 /* OrderData.m in Sources */ = {isa = PBXBuildFile; fileRef = F0CB9D8C197807C600AAC2B1 /* OrderData.m */; };
 		F0E864EB1975662E004C5A32 /* OrderSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E864EA1975662E004C5A32 /* OrderSuccessViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -477,6 +478,8 @@
 		F0842101197039AC007CC439 /* telphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "telphone@2x.png"; sourceTree = "<group>"; };
 		F084210719703BE5007CC439 /* townpeople@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "townpeople@2x.png"; sourceTree = "<group>"; };
 		F084210919703DA1007CC439 /* bar_telphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_telphone@2x.png"; sourceTree = "<group>"; };
+		F0CB9D8B197807C600AAC2B1 /* OrderData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderData.h; path = Model/OrderData.h; sourceTree = "<group>"; };
+		F0CB9D8C197807C600AAC2B1 /* OrderData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderData.m; path = Model/OrderData.m; sourceTree = "<group>"; };
 		F0E864E91975662E004C5A32 /* OrderSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderSuccessViewController.h; path = Controllers/OrderSuccessViewController.h; sourceTree = "<group>"; };
 		F0E864EA1975662E004C5A32 /* OrderSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderSuccessViewController.m; path = Controllers/OrderSuccessViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -998,6 +1001,8 @@
 				A0698D0F191DF63300E4FBA3 /* HKOrderDetailInfoModel.m */,
 				A0A344F4194EFC9F00F6F5D8 /* HKLogModel.h */,
 				A0A344F5194EFC9F00F6F5D8 /* HKLogModel.m */,
+				F0CB9D8B197807C600AAC2B1 /* OrderData.h */,
+				F0CB9D8C197807C600AAC2B1 /* OrderData.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1233,6 +1238,7 @@
 				A0008634190D394E0036846F /* SDWebImageDecoder.m in Sources */,
 				A052A027190BD70400B2C3B2 /* HKRoundCornerTelView.m in Sources */,
 				A052A04E190CDF7400B2C3B2 /* ASIDownloadCache.m in Sources */,
+				F0CB9D8D197807C600AAC2B1 /* OrderData.m in Sources */,
 				A0698D19191E2A1800E4FBA3 /* HKCommentTableViewCell.m in Sources */,
 				A0A8EA37191396B300A57A9E /* HKInfoTableViewController.m in Sources */,
 				A052A052190CDF7400B2C3B2 /* ASINetworkQueue.m in Sources */,
