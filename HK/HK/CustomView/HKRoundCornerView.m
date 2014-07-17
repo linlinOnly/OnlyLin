@@ -10,6 +10,21 @@
 
 @implementation HKRoundCornerView
 
+-(id)initWithFrame:(CGRect)frame cornerRadius:(int)cornerRadius
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        //
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
+        self.layer.cornerRadius  = cornerRadius;
+        
+        self.layer.borderColor = BORDERColor.CGColor;
+        self.layer.borderWidth = 0.4;
+    }
+    return self;
+}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -86,7 +101,7 @@
     if (self) {
         // Initialization code
         
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 30)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 300, 30)];
         [_titleLabel setText:title];
         
         [_titleLabel setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:14]];
@@ -97,7 +112,7 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        self.layer.cornerRadius  = 3;
+        self.layer.cornerRadius  = 6;
         
         self.layer.borderColor = BORDERColor.CGColor;
         self.layer.borderWidth = 1;

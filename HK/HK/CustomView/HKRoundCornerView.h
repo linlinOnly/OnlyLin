@@ -15,7 +15,8 @@
 @property (nonatomic,strong) UILabel *titleLabel;
 
 
-- (id)initWithFrame:(CGRect)frame title:(NSString *)title;
+-(id)initWithFrame:(CGRect)frame cornerRadius:(int)cornerRadius;
+-(id)initWithFrame:(CGRect)frame title:(NSString *)title;
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title viewtype:(int)type;
 -(id)initWithFrame:(CGRect)frame title:(NSString *)title titleimagename:(NSString*)imagename;
 @end

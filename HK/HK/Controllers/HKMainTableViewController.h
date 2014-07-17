@@ -33,4 +33,6 @@
 @property (nonatomic,strong) HKOrderDetail2TableViewController  *detail2VC;
 @property (nonatomic,strong) UILabel * balancelabel;
 @property (nonatomic,strong) UITextField * addressTfd;
+@property (nonatomic,strong) UIScrollView *bottomScorllView;
+@property (nonatomic, assign) int bottomheight_int;
 @end

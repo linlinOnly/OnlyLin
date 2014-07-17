@@ -7,10 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PartnerConfig.h"
+#import "DataSigner.h"
+#import "AlixPayResult.h"
+#import "DataVerifier.h"
+#import "AlixPayOrder.h"
+#import "AlixLibService.h"
 
-@interface OrderSuccessViewController : UIViewController
+
+#import "HKLogModel.h"
+@interface OrderSuccessViewController : UIViewController<HKLogModelDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary * data;
+@property (nonatomic,strong) UIScrollView *bottomScorllView;
+@property (nonatomic,strong) HKLogModel *log;
 //@property (nonatomic, copy) NSString * servertype;
 //@property (nonatomic, copy) NSString * balancedate;
 //@property (nonatomic, copy) NSString * orderId;

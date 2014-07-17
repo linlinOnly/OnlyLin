@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.title = @"订单详情";
+    self.title = @"确认订单";
     UILabel *customLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     [customLab setTextColor:[UIColor whiteColor]];
     customLab.backgroundColor = [UIColor clearColor];
@@ -49,24 +49,29 @@
     self.navigationItem.leftBarButtonItem = backItem;
     
     
+    _bottomScorllView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    _bottomScorllView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [_bottomScorllView setBackgroundColor:[UIColor whiteColor]];
+    [_bottomScorllView setContentSize:CGSizeMake(320, 540)];
+    [self.view addSubview:_bottomScorllView];
 //    [UIImage imageNamed:@"townpeople_c"]
     UIImageView * imageview=[[UIImageView alloc]initWithFrame:CGRectMake(80, 12, 20, 20)];
     imageview.image=[UIImage imageNamed:@"townpeople_c"];
-    [self.view addSubview:imageview];
+    [_bottomScorllView addSubview:imageview];
     
     UILabel *labeltitle=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(imageview)+4,8, 200, 30)];
     labeltitle.textColor=kColorFromRGB(0x755833);
     labeltitle.font=[UIFont systemFontOfSize:20];
     labeltitle.text=@"提交订单成功";
-    [self.view addSubview:labeltitle];
+    [_bottomScorllView addSubview:labeltitle];
     
     UILabel *line1 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(labeltitle)+4, 320, 1)];
     line1.backgroundColor = BGColor;
-    [self.view addSubview:line1];
+    [_bottomScorllView addSubview:line1];
     
     
     HKRoundCornerView * bottomview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(line1)+8, 300, 300)];
-    [self.view addSubview:bottomview];
+    [_bottomScorllView addSubview:bottomview];
     
     UILabel *label1=[[UILabel alloc]initWithFrame:CGRectMake(20,8, 62, 26)];
     label1.textColor=kColorFromRGB(0x755833);
@@ -197,13 +202,65 @@
     
     bottomview.frame=CGRectMake(10, kFrameSetBottom(line1)+8, 300, kFrameSetBottom(label7)+10);
     
+    UILabel *label8=[[UILabel alloc]initWithFrame:CGRectMake(10,kFrameSetBottom(bottomview)+10, 300, 26)];
+    label8.textColor=kColorFromRGB(0x755833);
+    label8.font=[UIFont systemFontOfSize:15];
+    label8.textAlignment=NSTextAlignmentCenter;
+    label8.text=@"请选择付款方式";
+    [_bottomScorllView addSubview:label8];
+
     
-    UIButton *submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [submitBtn setFrame:CGRectMake(115, kFrameSetBottom(bottomview)+10, 110, 34)];
-    [submitBtn addTarget:self action:@selector(submitDataToServer:) forControlEvents:UIControlEventTouchUpInside];
+    //余额视图
+    HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(label8)+10, 300, 40) title:@"账户余额"];
+    [_bottomScorllView addSubview:balanceview];
     
-    [submitBtn setBackgroundImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
-    [self.view addSubview:submitBtn];
+    UILabel *balanceviewlabelr=[[UILabel alloc]initWithFrame:CGRectMake(220,10, 80, 20)];
+    balanceviewlabelr.textColor=[UIColor redColor];
+    balanceviewlabelr.font=[UIFont systemFontOfSize:15];
+    balanceviewlabelr.textAlignment=NSTextAlignmentCenter;
+    balanceviewlabelr.text=@"0";
+    [balanceview addSubview:balanceviewlabelr];
+    
+    
+    //上门收费
+    HKRoundCornerView * payview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10,kFrameSetBottom(balanceview)+10, 300, 40) title:@"上门收费"];
+    [_bottomScorllView addSubview:payview];
+    
+    UIButton * btnshangmen=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 300, 40)];
+    [btnshangmen setBackgroundColor:[UIColor clearColor]];
+    [btnshangmen addTarget:self action:@selector(btnshangmenClick:) forControlEvents:UIControlEventTouchUpInside];
+    [payview addSubview:btnshangmen];
+    
+    
+    //上门收费
+    HKRoundCornerView * netPayview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(payview)+10, 300, 80) title:@"网上支付"];
+    [_bottomScorllView addSubview:netPayview];
+    
+    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, 300, 1)];
+    line.backgroundColor = BGColor;
+    [netPayview addSubview:line];
+    
+    UIButton * zhifubaoBtn=[[UIButton alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(line)+5, 92, 30)];
+    [zhifubaoBtn setImage:[UIImage imageNamed:@"zhifubaobtn"] forState:UIControlStateNormal];
+    [zhifubaoBtn addTarget:self action:@selector(zhifubaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [netPayview addSubview:zhifubaoBtn];
+    
+    UILabel * zhifubaoLab = [[UILabel alloc] initWithFrame:CGRectMake(kFrameSetRight(zhifubaoBtn)+5, kFrameSetBottom(line)+8, 120, 20)];
+    [zhifubaoLab setText:@"支付宝收银台"];
+    [zhifubaoLab setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:12]];
+    [zhifubaoLab setBackgroundColor:[UIColor clearColor]];
+    zhifubaoLab.textColor=kColorFromRGB(0x755833);
+    [zhifubaoLab setTextAlignment:NSTextAlignmentLeft];
+    [netPayview addSubview:zhifubaoLab];
+    
+    [_bottomScorllView setContentSize:CGSizeMake(kFrameW(_bottomScorllView), kFrameSetBottom(netPayview)+20)];
+    
+//    UIButton *submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    [submitBtn setFrame:CGRectMake(115, kFrameSetBottom(bottomview)+10, 110, 34)];
+//    [submitBtn addTarget:self action:@selector(submitDataToServer:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [submitBtn setBackgroundImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
+//    [self.view addSubview:submitBtn];
     
     
 }
@@ -225,15 +282,134 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)zhifubaoBtnClick:(UIButton*)btn
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    _log = [[HKLogModel alloc] initWithOrderSN:[_data valueForKey:@"order_sn"] andUid:[_data valueForKey:@"uid"]];
+    
+    _log.delegate = self;
+    
+    [SVProgressHUD showWithStatus:@"验证中..." maskType:SVProgressHUDMaskTypeClear];
+    [_log postLogModel];
+    
 }
-*/
+-(void)finishLog:(NSDictionary *)dic
+{
+    [SVProgressHUD dismiss];
+    [self payForOrder];
+    
+    //    if ([[dic objectForKey:@"code"] intValue] == 108) {
+    //        [SVProgressHUD dismiss];
+    ////        NSLog(@"...dic %@",dic);
+    //
+    //    }
+    //    else{
+    //        [SVProgressHUD showErrorWithStatus_custom:@"验证失败，无法支付" duration:1.0];
+    //    }
+}
+-(void)logFailed
+{
+    [SVProgressHUD dismiss];
+    [self payForOrder];
+    //    [SVProgressHUD showErrorWithStatus_custom:@"验证失败，无法支付" duration:1.0];
+}
+
+
+
+-(void)payForOrder
+{
+    NSString *appScheme = @"niujiabang";
+    NSString* orderInfo = [self getOrderInfo];
+    NSString* signedStr = [self doRsa:orderInfo];
+    
+    NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                             orderInfo, signedStr, @"RSA"];
+	
+    [AlixLibService payOrder:orderString AndScheme:appScheme seletor:@selector(paymentResult:) target:self];
+    
+}
+
+
+-(NSString*)getOrderInfo
+{
+    /*
+	 *点击获取prodcut实例并初始化订单信息
+	 */
+    //	Product *product = [_products objectAtIndex:index];
+    AlixPayOrder *order = [[AlixPayOrder alloc] init];
+    order.partner = PartnerID;
+    order.seller = SellerID;
+    
+    order.tradeNO = [_data valueForKey:@"order_sn"];
+	order.productName = @"牛家帮家政服务"; //商品标题
+	order.productDescription = [NSString stringWithFormat:@"%@",[_data valueForKey:@"address"]]; //商品描述
+    
+    //	order.amount = [NSString stringWithFormat:@"%.2f",[model.duration intValue]*50.0]; //商品价格
+    
+    order.amount = [NSString stringWithFormat:@"%.2f",1*1.0];
+	order.notifyURL =  @"http://www.niuhome.com/AppAlipayNotify"; //回调URL
+    //    order.notifyURL = @"http://www.niuhome.com/AlipayReturn";
+	
+	return [order description];
+}
+
+
+-(NSString*)doRsa:(NSString*)orderInfo
+{
+    id<DataSigner> signer;
+    signer = CreateRSADataSigner(PartnerPrivKey);
+    
+    NSString *signedString = [signer signString:orderInfo];
+    
+    return signedString;
+}
+
+-(void)paymentResultDelegate:(NSString *)result
+{
+    NSLog(@" payment result %@",result);
+}
+
+
+//wap回调函数
+-(void)paymentResult:(NSString *)resultd
+{
+    
+    AlixPayResult* result = [[AlixPayResult alloc] initWithString:resultd];
+	if (result)
+    {
+		
+		if (result.statusCode == 9000)
+        {
+			/*
+			 *用公钥验证签名 严格验证请使用result.resultString与result.signString验签
+			 */
+            
+            //交易成功
+            NSString* key = AlipayPubKey;//签约帐户后获取到的支付宝公钥
+			id<DataVerifier> verifier;
+            verifier = CreateRSADataVerifier(key);
+            
+			if ([verifier verifyString:result.resultString withSign:result.signString])
+            {
+                //验证签名成功，交易结果无篡改
+                
+                NSLog(@"hehe success");
+			}
+        }
+        else
+        {
+            //交易失败
+        }
+    }
+    else
+    {
+        //失败
+    }
+    
+}
+-(void)btnshangmenClick:(UIButton*)btn
+{
+    NSLog(@"点击上门付钱");
+}
+
 
 @end

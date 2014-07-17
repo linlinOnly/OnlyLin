@@ -39,7 +39,7 @@
         _tv.textAlignment = NSTextAlignmentLeft;
         _tv.returnKeyType = UIReturnKeyDone;
         _tv.delegate = self;
-
+        _tv.font=[UIFont systemFontOfSize:13];
         _tv.adjustsFontSizeToFitWidth = YES;
         _tv.minimumFontSize = 5;
         _tv.textColor=[UIColor blackColor];

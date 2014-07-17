@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		735AF76519766CF600B94983 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735AF76419766CF600B94983 /* PayViewController.m */; };
+		735EEA461977A29500EAF6E5 /* OdMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735EEA451977A29500EAF6E5 /* OdMessageViewController.m */; };
 		A0008619190D2E330036846F /* HKKeeperInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0008618190D2E330036846F /* HKKeeperInfoView.m */; };
 		A000861C190D2EB10036846F /* HKKeeperModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A000861B190D2EB10036846F /* HKKeeperModel.m */; };
 		A0008632190D394E0036846F /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A000861F190D394E0036846F /* MKAnnotationView+WebCache.m */; };
@@ -183,6 +184,8 @@
 /* Begin PBXFileReference section */
 		735AF76319766CF600B94983 /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayViewController.h; path = Controllers/PayViewController.h; sourceTree = "<group>"; };
 		735AF76419766CF600B94983 /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PayViewController.m; path = Controllers/PayViewController.m; sourceTree = "<group>"; };
+		735EEA441977A29500EAF6E5 /* OdMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdMessageViewController.h; path = Controllers/OdMessageViewController.h; sourceTree = "<group>"; };
+		735EEA451977A29500EAF6E5 /* OdMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OdMessageViewController.m; path = Controllers/OdMessageViewController.m; sourceTree = "<group>"; };
 		A0008617190D2E330036846F /* HKKeeperInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKKeeperInfoView.h; path = CustomView/HKKeeperInfoView.h; sourceTree = "<group>"; };
 		A0008618190D2E330036846F /* HKKeeperInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKKeeperInfoView.m; path = CustomView/HKKeeperInfoView.m; sourceTree = "<group>"; };
 		A000861A190D2EB10036846F /* HKKeeperModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKKeeperModel.h; path = Model/HKKeeperModel.h; sourceTree = "<group>"; };
@@ -670,6 +673,8 @@
 				F0E864EA1975662E004C5A32 /* OrderSuccessViewController.m */,
 				735AF76319766CF600B94983 /* PayViewController.h */,
 				735AF76419766CF600B94983 /* PayViewController.m */,
+				735EEA441977A29500EAF6E5 /* OdMessageViewController.h */,
+				735EEA451977A29500EAF6E5 /* OdMessageViewController.m */,
 				A0698D12191E294C00E4FBA3 /* HKorderDetailTableController.m */,
 				A0698D2C191F860F00E4FBA3 /* HKOrderDetail2TableViewController.h */,
 				A0698D2D191F860F00E4FBA3 /* HKOrderDetail2TableViewController.m */,
@@ -1218,6 +1223,7 @@
 				A0698D0D191DF3F800E4FBA3 /* HKOrderDetailModel.m in Sources */,
 				A0008635190D394E0036846F /* SDWebImageDownloader.m in Sources */,
 				A0DFD414190BBD2800DC9F78 /* HKOrderModel.m in Sources */,
+				735EEA461977A29500EAF6E5 /* OdMessageViewController.m in Sources */,
 				A0698D28191F755900E4FBA3 /* HKEOInfoView.m in Sources */,
 				A052A051190CDF7400B2C3B2 /* ASIInputStream.m in Sources */,
 				A0A7D1D6194B024000A053CF /* NSObject+SBJSON.m in Sources */,

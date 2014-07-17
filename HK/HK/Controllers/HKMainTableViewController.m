@@ -56,9 +56,6 @@
 {
     [FrontHelper logout];
     HKLoginViewController *loginCV = [[HKLoginViewController alloc] init];
-//    HKNavigationController *loginNavi = [[HKNavigationController alloc] initWithRootViewController:loginCV];
-//    [self.navigationController pushViewController:loginCV animated:YES];
-//    [self presentViewController:loginNavi animated:YES completion:nil];
     [self presentViewController:loginCV animated:YES completion:nil];
     
 }
@@ -83,6 +80,9 @@
     _listModel = [[HKOrderListModel alloc] init];
     _listModel.delegate = self;
     _itemModel = [[HKOrderItemModel alloc] init];
+    
+    
+    
     
     //余额视图
     HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, 10, 300, 40) title:@"账户余额" titleimagename:@"yuer"];
@@ -116,6 +116,14 @@
     [oderviewright addTarget:self action:@selector(oderviewrightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [oderview addSubview:oderviewright];
     
+    _bottomheight_int=10;
+    
+    _bottomScorllView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(oderview)+10, 320, self.view.frame.size.height)];
+    _bottomScorllView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [_bottomScorllView setBackgroundColor:[UIColor whiteColor]];
+    [_bottomScorllView setContentSize:CGSizeMake(320, 540)];
+    [self.view addSubview:_bottomScorllView];
+    
     
 //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //    self.tableView.backgroundColor =[UIColor whiteColor];
@@ -130,7 +138,11 @@
 }
 -(void)oderviewrightBtnClick:(UIButton*)Btn
 {
-    
+    Btn.selected=!Btn.selected;
+    [UIView animateWithDuration:.3 animations:^{
+        _bottomScorllView.alpha=_bottomScorllView.alpha==1?0:1;
+    }];
+   
 }
 -(void)homeAddressrightBtnClick:(UIButton*)Btn
 {
@@ -231,7 +243,90 @@
 {
 //    NSLog(@"orderList %@",dic);
 }
+-(void)addOrderListView:(NSDictionary*)dic
+{
+    HKRoundCornerView * oderview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, _bottomheight_int , 300, 170) cornerRadius:2];
+    [_bottomScorllView addSubview:oderview];
+    _bottomheight_int=kFrameSetBottom(oderview)+10;
+    
+    UILabel *label1=[[UILabel alloc]initWithFrame:CGRectMake(13,10, 52, 12)];
+    label1.textColor=kColorFromRGB(0x333333);
+    label1.font=[UIFont systemFontOfSize:12];
+    label1.text=@"订单日期:";
+    [oderview addSubview:label1];
+    
+    UILabel *label1r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,10, 160, 12)];
+    label1r.textColor=kColorFromRGB(0x333333);
+    label1r.font=[UIFont systemFontOfSize:9];
+    label1r.text=[NSString stringWithFormat:@"%@  %@",[dic objectForKey:@"date"],[dic objectForKey:@"work_times"]];
+    [oderview addSubview:label1r];
+    
+    
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label1)+8, 52, 12)];
+    label2.textColor=kColorFromRGB(0x666666);
+    label2.font=[UIFont systemFontOfSize:11];
+    label2.text=@"订单编号:";
+    [oderview addSubview:label2];
+    
+    UILabel *label2r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label1)+8, 160, 12)];
+    label2r.textColor=kColorFromRGB(0x666666);
+    label2r.font=[UIFont systemFontOfSize:9];
+    label2r.text=[dic valueForKey:@"order_sn"];
+    [oderview addSubview:label2r];
+    
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label2)+8, 52, 12)];
+    label3.textColor=kColorFromRGB(0x666666);
+    label3.font=[UIFont systemFontOfSize:11];
+    label3.text=@"订单总价:";
+    [oderview addSubview:label3];
+    
+    UILabel *label3r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label2)+8, 160, 12)];
+    label3r.textColor=kColorFromRGB(0x666666);
+    label3r.font=[UIFont systemFontOfSize:9];
+    label3r.text=[NSString stringWithFormat:@"¥%@",[dic objectForKey:@"total_fee"]];
+    [oderview addSubview:label3r];
+    
+    UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label3)+8, 52, 12)];
+    label4.textColor=kColorFromRGB(0x666666);
+    label4.font=[UIFont systemFontOfSize:11];
+    label4.text=@"订单类型:";
+    [oderview addSubview:label4];
+    
+    UILabel *label4r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label3)+8, 160, 12)];
+    label4r.textColor=kColorFromRGB(0x666666);
+    label4r.font=[UIFont systemFontOfSize:9];
+    label4r.text=[[NSString stringWithFormat:@"%@",[dic objectForKey:@"order_type"]] isEqualToString:@"1"]?@"预约订单":@"小时达订单";
+    [oderview addSubview:label4r];
+    
+    UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label4)+8, 52, 12)];
+    label5.textColor=kColorFromRGB(0x666666);
+    label5.font=[UIFont systemFontOfSize:11];
+    label5.text=@"订单状态:";
+    [oderview addSubview:label5];
+    
+    UILabel *label5r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label4)+8, 160, 12)];
+    label5r.textColor=kColorFromRGB(0x666666);
+    label5r.font=[UIFont systemFontOfSize:9];
+    label5r.text=[[NSString stringWithFormat:@"%@",[dic objectForKey:@"order_status"]] isEqualToString:@"1"]?@"已派送":@"已完成";
+    [oderview addSubview:label5r];
 
+    UIImageView * imageview=[[UIImageView alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label5)+8, 12, 12)];
+    imageview.image=[UIImage imageNamed:@""];
+    [oderview addSubview:imageview];
+    
+    UILabel *label6=[[UILabel alloc]initWithFrame:CGRectMake(30,kFrameSetBottom(label5)+8, 300, 12)];
+    label6.textColor=kColorFromRGB(0x666666);
+    label6.font=[UIFont systemFontOfSize:11];
+    label6.text=[dic objectForKey:@"address"];
+    [oderview addSubview:label6];
+    
+    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label6)+10, 300, 0.3)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    line.alpha=0.2;
+    [oderview addSubview:line];
+    
+    [_bottomScorllView setContentSize:CGSizeMake(kFrameW(_bottomScorllView), kFrameSetBottom(oderview)+10)];
+}
 
 -(void)sendOrderListFinish:(NSDictionary *)dic
 {
@@ -241,8 +336,11 @@
     }
     else
     {
-        _orderList = [dic objectForKey:@"result"];
-        
+        _orderList = [dic objectForKey:@"order_list"];
+        for (int i=0; i<_orderList.count; i++)
+        {
+            [self addOrderListView:[_orderList objectAtIndex:i]];
+        }
         
         
         
