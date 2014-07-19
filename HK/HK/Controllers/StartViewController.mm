@@ -251,16 +251,11 @@
 
 -(void)submitDataToServer
 {
-    [self sendOrderFinish:nil];
-    return;
     if (![FrontHelper checkLogin]) {
         [self toLoginPage];
         return;
     }
-    
     _order = [[HKOrderModel alloc] initWithDate:_localView.date local:_localView.tv.text tel:_telView.teltf.text production_id:_timeLongView.serverTimeLong name:_telView.nametf.text serverType:_timeLongView.service_type oderType:_order_type];
-    
-    
     _order.delegate = self;
     
     [_order sendPostToServer];
@@ -277,22 +272,22 @@
 
 -(void)sendOrderFinish:(NSDictionary *)dic
 {
-//    if ([[dic objectForKey:@"code"] intValue] == 108)
+    if ([[dic objectForKey:@"code"] intValue] == 108)
     {
         [SVProgressHUD dismissWithSuccess:@"下单成功"];
         _order = [[HKOrderModel alloc] initWithDate:_localView.date local:_localView.tv.text tel:_telView.teltf.text production_id:_timeLongView.serverTimeLong name:_telView.nametf.text serverType:_timeLongView.service_type oderType:_order_type];
         
         OrderSuccessViewController * ordersuccessview=[OrderSuccessViewController alloc];
-        ordersuccessview.data=[dic objectForKey:@"order"];
+        ordersuccessview.data=[OrderData itemFormOrderSuccessDic:dic];
         ordersuccessview = [ordersuccessview init];
         [self.navigationController pushViewController:ordersuccessview animated:YES];
         
     }
     
-//    else
-//    {
-//        [SVProgressHUD dismissWithError:@"下单失败"];
-//    }
+    else
+    {
+        [SVProgressHUD dismissWithError:@"下单失败"];
+    }
 
     
 }

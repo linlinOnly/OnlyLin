@@ -11,7 +11,9 @@
 
 @interface OrderData : NSObject
 @property(nonatomic, copy) NSString * address;
-@property(nonatomic, copy) NSString * create_time;
+@property(nonatomic, copy) NSString * create_time;//订单日期｜下单日期
+@property(nonatomic, copy) NSString * reservetime;//预约时间 date + work_times
+@property(nonatomic, copy) NSString * product_id;
 @property(nonatomic, copy) NSString * order_id;
 @property(nonatomic, copy) NSString * order_sn;
 @property(nonatomic, copy) NSString * order_type;
@@ -20,7 +22,11 @@
 @property(nonatomic, copy) NSString * total_fee;
 @property(nonatomic, copy) NSString * order_status;
 @property(nonatomic, copy) NSString * mobile;
+@property(nonatomic, copy) NSString * uid;
+@property(nonatomic, copy) NSString * evaluation;
+@property(nonatomic, copy) NSString * e_time;
 
-+ (id )itemFormDic:(NSDictionary *)dic;
++ (id )itemFormOrderListDic:(NSDictionary *)dic;
++ (id )itemFormOrderSuccessDic:(NSDictionary *)dic;
 
 @end

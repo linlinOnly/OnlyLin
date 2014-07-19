@@ -13,12 +13,12 @@
 #import "DataVerifier.h"
 #import "AlixPayOrder.h"
 #import "AlixLibService.h"
-
+#import "OrderData.h"
 
 #import "HKLogModel.h"
 @interface OrderSuccessViewController : UIViewController<HKLogModelDelegate>
 
-@property (nonatomic, strong) NSMutableDictionary * data;
+@property (nonatomic, strong) OrderData * data;
 @property (nonatomic,strong) UIScrollView *bottomScorllView;
 @property (nonatomic,strong) HKLogModel *log;
 //@property (nonatomic, copy) NSString * servertype;

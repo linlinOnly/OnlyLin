@@ -79,16 +79,16 @@
     label1.text=@"订单类型:";
     [bottomview addSubview:label1];
     
-    UILabel *label1r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,8, 60, 26)];
+    UILabel *label1r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,8, 70, 26)];
     label1r.textColor=kColorFromRGB(0x755833);
     label1r.font=[UIFont systemFontOfSize:14];
-    label1r.text=@"预约订单";
+    label1r.text=[_data.order_type isEqualToString:@"2"] ? @"预约订单" : @"小时达订单";
     [bottomview addSubview:label1r];
     
-    UILabel *label1r2=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1r)+10,8, 100, 26)];
+    UILabel *label1r2=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1r),8, 100, 26)];
     label1r2.textColor=kColorFromRGB(0x000000);
     label1r2.font=[UIFont systemFontOfSize:12];
-    label1r2.text=[[NSString stringWithFormat:@"%@",[_data objectForKey:@"service_type"]] isEqualToString:@"1"]?@"(双人组合)":@"(单人)";
+    label1r2.text=[_data.service_type isEqualToString:@"2"] ? @"(双人组合)" : @"";
     [bottomview addSubview:label1r2];
     
     UILabel *line2 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label1)+4, 300, 1)];
@@ -107,7 +107,7 @@
     UILabel *label2r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label2)+16,kFrameSetBottom(line2)+4, 160, 26)];
     label2r.textColor=kColorFromRGB(0x000000);
     label2r.font=[UIFont systemFontOfSize:11];
-    label2r.text=[[NSString stringWithFormat:@"%@",[_data objectForKey:@"order_type"]] isEqualToString:@"1"]?@"一小时后达到":[_data objectForKey:@"date"];
+    label2r.text=_data.reservetime;
     [bottomview addSubview:label2r];
     
     UILabel *line3 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label2)+4, 300, 1)];
@@ -118,13 +118,13 @@
     UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(20,kFrameSetBottom(line3)+4, 62, 26)];
     label3.textColor=kColorFromRGB(0x755833);
     label3.font=[UIFont systemFontOfSize:13];
-    label3.text=@"订单编号:";
+    label3.text=@"服务时长:";
     [bottomview addSubview:label3];
     
     UILabel *label3r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label3)+16,kFrameSetBottom(line3)+4, 160, 26)];
     label3r.textColor=kColorFromRGB(0x000000);
     label3r.font=[UIFont systemFontOfSize:11];
-    label3r.text=[_data objectForKey:@"order_sn"];
+    label3r.text=_data.product_id;
     [bottomview addSubview:label3r];
     
     UILabel *line4 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label3)+4, 300, 1)];
@@ -136,13 +136,13 @@
     UILabel *label4=[[UILabel alloc]initWithFrame:CGRectMake(20,kFrameSetBottom(line4)+4, 62, 26)];
     label4.textColor=kColorFromRGB(0x755833);
     label4.font=[UIFont systemFontOfSize:13];
-    label4.text=@"服务地址:";
+    label4.text=@"订单编号:";
     [bottomview addSubview:label4];
     
     UILabel *label4r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label4)+16,kFrameSetBottom(line4)+4, 160, 26)];
     label4r.textColor=kColorFromRGB(0x000000);
     label4r.font=[UIFont systemFontOfSize:11];
-    label4r.text=[_data objectForKey:@"address"];
+    label4r.text=_data.order_sn;
     [bottomview addSubview:label4r];
     
     UILabel *line5 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label4)+4, 300, 1)];
@@ -155,13 +155,13 @@
     UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(20,kFrameSetBottom(line5)+4, 62, 26)];
     label5.textColor=kColorFromRGB(0x755833);
     label5.font=[UIFont systemFontOfSize:13];
-    label5.text=@"联系姓名:";
+    label5.text=@"服务地址:";
     [bottomview addSubview:label5];
     
     UILabel *label5r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label5)+16,kFrameSetBottom(line5)+4, 160, 26)];
     label5r.textColor=kColorFromRGB(0x000000);
     label5r.font=[UIFont systemFontOfSize:11];
-    label5r.text=[_data valueForKey:@"contacts"];
+    label5r.text=_data.address;
     [bottomview addSubview:label5r];
     
     UILabel *line6 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label5)+4, 300, 1)];
@@ -179,7 +179,7 @@
     UILabel *label6r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label6)+16,kFrameSetBottom(line6)+4, 160, 26)];
     label6r.textColor=kColorFromRGB(0x000000);
     label6r.font=[UIFont systemFontOfSize:11];
-    label6r.text=[_data objectForKey:@"mobile"];
+    label6r.text=_data.mobile;
     [bottomview addSubview:label6r];
     
     UILabel *line7 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label6)+4, 300, 1)];
@@ -197,7 +197,7 @@
     UILabel *label7r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label7)+16,kFrameSetBottom(line7)+4, 160, 26)];
     label7r.textColor=[UIColor redColor];
     label7r.font=[UIFont systemFontOfSize:11];
-    label7r.text=  [NSString stringWithFormat:@"¥%@",[_data valueForKey:@"total_fee"]];
+    label7r.text=_data.total_fee;
     [bottomview addSubview:label7r];
     
     bottomview.frame=CGRectMake(10, kFrameSetBottom(line1)+8, 300, kFrameSetBottom(label7)+10);
@@ -284,7 +284,7 @@
 
 -(void)zhifubaoBtnClick:(UIButton*)btn
 {
-    _log = [[HKLogModel alloc] initWithOrderSN:[_data valueForKey:@"order_sn"] andUid:[_data valueForKey:@"uid"]];
+    _log = [[HKLogModel alloc] initWithOrderSN:_data.order_sn andUid:_data.uid];
     
     _log.delegate = self;
     
@@ -339,9 +339,9 @@
     order.partner = PartnerID;
     order.seller = SellerID;
     
-    order.tradeNO = [_data valueForKey:@"order_sn"];
+    order.tradeNO = _data.order_sn;//[_data valueForKey:@"order_sn"];
 	order.productName = @"牛家帮家政服务"; //商品标题
-	order.productDescription = [NSString stringWithFormat:@"%@",[_data valueForKey:@"address"]]; //商品描述
+	order.productDescription = [NSString stringWithFormat:@"%@",_data.address]; //商品描述
     
     //	order.amount = [NSString stringWithFormat:@"%.2f",[model.duration intValue]*50.0]; //商品价格
     

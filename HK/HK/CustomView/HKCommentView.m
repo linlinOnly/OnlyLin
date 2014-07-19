@@ -187,8 +187,6 @@
     [self addSubview:_title];
     [self addSubview:_commentFlag];
 }
-
-
 -(void)textViewDidChange:(UITextView *)textView
 {
     if (textView.text.length <= 0) {

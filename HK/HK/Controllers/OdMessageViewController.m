@@ -92,13 +92,20 @@
     label3.text=@"订单类型:";
     [bottomview addSubview:label3];
     
-    UILabel *label3r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label3)+16,kFrameSetBottom(line3)+4, 160, 26)];
-    label3r.textColor=kColorFromRGB(0x000000);
-    label3r.font=[UIFont systemFontOfSize:11];
-    label3r.text=_data.service_type;
+    UILabel *label3r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label3)+16,kFrameSetBottom(line3)+4, 70, 26)];
+    label3r.textColor=kColorFromRGB(0x755833);
+    label3r.font=[UIFont systemFontOfSize:13];
+    label3r.text=[_data.order_type isEqualToString:@"2"] ? @"预约订单" : @"小时达订单";
     [bottomview addSubview:label3r];
     
-    UILabel *line4 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label3)+4, 300, 1)];
+    UILabel *label3r2=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label3r),kFrameSetBottom(line3)+4, 100, 26)];
+    label3r2.textColor=kColorFromRGB(0x000000);
+    label3r2.font=[UIFont systemFontOfSize:13];
+    label3r2.text=[_data.service_type isEqualToString:@"2"] ? @"(双人组合)" : @"";
+    [bottomview addSubview:label3r2];
+    
+    
+    UILabel *line4 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label3)+4, 300, 80)];
     line4.backgroundColor = BGColor;
     [bottomview addSubview:line4];
     
@@ -110,6 +117,7 @@
     label4.text=@"订单金额";
     [bottomview addSubview:label4];
     
+    
     UILabel *label4r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label4)+16,kFrameSetBottom(line4)+4, 160, 26)];
     label4r.textColor=kColorFromRGB(0x000000);
     label4r.font=[UIFont systemFontOfSize:11];
@@ -119,7 +127,6 @@
     UILabel *line5 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label4)+4, 300, 1)];
     line5.backgroundColor = BGColor;
     [bottomview addSubview:line5];
-    
     
     
     
@@ -153,12 +160,146 @@
     label6r.text=_data.mobile;
     [bottomview addSubview:label6r];
     
+    bottomview.frame=CGRectMake(kFrameX(bottomview), kFrameY(bottomview), 300, kFrameSetBottom(label6)+10);
+    
+    if (!_data.e_time)
+    {
+        UILabel *line7 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label6)+4, 300, 1)];
+        line7.backgroundColor = BGColor;
+        [bottomview addSubview:line7];
+        
+        UILabel *label8=[[UILabel alloc]initWithFrame:CGRectMake(20,kFrameSetBottom(line7)+4, 62, 26)];
+        label8.textColor=kColorFromRGB(0x755833);
+        label8.font=[UIFont systemFontOfSize:13];
+        label8.text=@"服务评价:";
+        [bottomview addSubview:label8];
+        
+        UILabel *label8r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label8)+16,kFrameSetBottom(line7)+4, 160, 26)];
+        label8r.textColor=kColorFromRGB(0x755833);
+        label8r.font=[UIFont systemFontOfSize:13];
+        label8r.text=_data.evaluation?@"满意":@"不满意";
+        [bottomview addSubview:label8r];
+        
+        bottomview.frame=CGRectMake(kFrameX(bottomview), kFrameY(bottomview), 300, kFrameSetBottom(label8)+10);
+        
+    }else
+    {
+        UILabel *label8=[[UILabel alloc]initWithFrame:CGRectMake(30,kFrameSetBottom(bottomview)+4, 62, 22)];
+        label8.textColor=kColorFromRGB(0x755833);
+        label8.font=[UIFont systemFontOfSize:13];
+        label8.text=@"服务评价:";
+        [_bottomScorllView addSubview:label8];
+        
+        UIButton *btn8r=[[UIButton alloc]initWithFrame:CGRectMake(kFrameSetRight(label8)+10,kFrameSetBottom(bottomview)+5, 50, 22)];
+        [btn8r setTitle:@"满意" forState:UIControlStateNormal];
+        btn8r.titleLabel.font=[UIFont systemFontOfSize:12];
+        btn8r.tag=1;
+        btn8r.selected=true;
+        [btn8r addTarget:self action:@selector(contBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [btn8r setTitleColor:kColorFromRGB(0x000000) forState:UIControlStateNormal];
+        [btn8r setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateSelected];
+        [_bottomScorllView addSubview:btn8r];
+        
+        UIButton *btn8r2=[[UIButton alloc]initWithFrame:CGRectMake(kFrameSetRight(btn8r)+10,kFrameSetBottom(bottomview)+5, 60, 22)];
+        [btn8r2 setTitle:@"不满意" forState:UIControlStateNormal];
+        btn8r2.titleLabel.font=[UIFont systemFontOfSize:12];
+        btn8r2.tag=2;
+        [btn8r2 addTarget:self action:@selector(contBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [btn8r2 setTitleColor:kColorFromRGB(0x000000) forState:UIControlStateNormal];
+        [btn8r2 setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateSelected];
+        [_bottomScorllView addSubview:btn8r2];
+        
+        UITextView * tv=[[UITextView alloc]initWithFrame:CGRectMake(10,kFrameSetBottom(btn8r)+5, 300, 60)];
+        tv.backgroundColor=[UIColor redColor];
+        tv.tag=3;
+        tv.delegate=self;
+        [_bottomScorllView addSubview:tv];
+        
+        UIButton *btnsumb=[[UIButton alloc]initWithFrame:CGRectMake(100,kFrameSetBottom(tv)+5, 60, 22)];
+        [btnsumb setTitle:@"提交评论" forState:UIControlStateNormal];
+        [btnsumb setBackgroundColor:[UIColor yellowColor]];
+        btnsumb.titleLabel.font=[UIFont systemFontOfSize:12];
+        [btnsumb addTarget:self action:@selector(btnsumbComment:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomScorllView addSubview:btnsumb];
+        
+    }
 
     
 }
+-(void)btnsumbComment:(UIButton*)btn
+{
+    UITextView * tv=(UITextView*)[self.view viewWithTag:3];
+    UIButton * commentbtn=(UIButton*)[self.view viewWithTag:1];
+    _model = [[HKCommentModel alloc] initWithOrderId:[_data.order_id intValue] Status:commentbtn.selected?1:2 Comment:tv.text];
+    _model.delegate = self;
+    [_model postToServer];
+    
+}
+-(void)commentFinish:(NSDictionary *)dic
+{
+    //    NSLog(@"comment %@",dic);
+    
+    if ([[dic objectForKey:@"code"] intValue] == 108) {
+        //
+        [SVProgressHUD dismissWithSuccess:@"评论成功"];
+        [self changLayousts];
+        
+    }
+    else
+    {
+        [SVProgressHUD dismissWithError:@"评论失败"];
+    }
+}
+-(void)changLayousts
+{
+    
+}
 
+
+-(void)contBtn:(UIButton*)btn
+{
+    btn.selected=!btn.selected;
+    UIButton * antherbtn=(UIButton*)[self.view viewWithTag:btn.tag==1?2:1];
+    antherbtn.selected=!antherbtn.selected;
+    
+}
 -(void)returnView
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)keyboardClick:(UIButton*)btn
+{
+    UITextView * textview=(UITextView*)[self.view viewWithTag:3];
+    [textview resignFirstResponder];
+    [btn removeFromSuperview];
+    [UIView animateWithDuration:.3 animations:^{
+        [_bottomScorllView setFrame:CGRectMake(kFrameX(_bottomScorllView), 0, kFrameW(_bottomScorllView), kFrameH(_bottomScorllView))];
+    }];
+    
+}
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    UIButton * keyboard=[[UIButton alloc]initWithFrame:self.view.frame];
+    [self.view addSubview:keyboard];
+    [keyboard setBackgroundColor:[UIColor clearColor]];
+    keyboard.tag=5;
+    [keyboard addTarget:self action:@selector(keyboardClick:) forControlEvents:UIControlEventTouchUpInside];
+    [UIView animateWithDuration:.3 animations:^{
+        [_bottomScorllView setFrame:CGRectMake(0, -150, kFrameW(_bottomScorllView), kFrameH(_bottomScorllView))];
+    }];
+}
+- (BOOL)textView: (UITextView *)textview shouldChangeTextInRange: (NSRange)range replacementText: (NSString *)text {
+    if ([text isEqualToString:@"\n"])
+    {
+        [textview resignFirstResponder];
+        UIButton * keyboard=(UIButton*)[self.view viewWithTag:5];
+        [keyboard removeFromSuperview];
+        [UIView animateWithDuration:.3 animations:^{
+             [_bottomScorllView setFrame:CGRectMake(kFrameX(_bottomScorllView), 0, kFrameW(_bottomScorllView), kFrameH(_bottomScorllView))];
+        }];
+        return false;
+    }
+    return YES;
+}
+
 @end

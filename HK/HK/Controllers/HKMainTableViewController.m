@@ -10,6 +10,7 @@
 #import "HKNavigationController.h"
 #import "OrderData.h"
 #import "OdMessageViewController.h"
+#import "OrderSuccessViewController.h"
 @interface HKMainTableViewController ()
 
 @end
@@ -259,7 +260,7 @@
     
     UILabel *label1r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,10, 160, 12)];
     label1r.textColor=kColorFromRGB(0x333333);
-    label1r.font=[UIFont systemFontOfSize:9];
+    label1r.font=[UIFont systemFontOfSize:10];
     label1r.text=orderdata.create_time;
     [oderview addSubview:label1r];
     
@@ -297,7 +298,7 @@
     UILabel *label4r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label1)+16,kFrameSetBottom(label3)+8, 160, 12)];
     label4r.textColor=kColorFromRGB(0x666666);
     label4r.font=[UIFont systemFontOfSize:9];
-    label4r.text=orderdata.order_type;
+    label4r.text=[NSString stringWithFormat:@"%@%@",[orderdata.order_type isEqualToString:@"2"] ? @"预约订单" : @"小时达订单",[orderdata.service_type isEqualToString:@"2"] ? @"(双人组合)" : @""];
     [oderview addSubview:label4r];
     
     UILabel *label5=[[UILabel alloc]initWithFrame:CGRectMake(13,kFrameSetBottom(label4)+8, 52, 12)];
@@ -327,42 +328,56 @@
     line.alpha=0.2;
     [oderview addSubview:line];
     
+    if (![orderdata.pay_status isEqualToString:@"1"])
+    {
+        UIButton * orderMessage = [[UIButton alloc] initWithFrame:CGRectMake(15, kFrameSetBottom(line)+4, 90, 30)];
+        [orderMessage setTitle:@"订单详情" forState:UIControlStateNormal];
+        [orderMessage.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [orderMessage setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+        [orderMessage addTarget:self action:@selector(orderMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
+        orderMessage.tag=index;
+        [oderview addSubview:orderMessage];
+        
+        UIButton * tryagain = [[UIButton alloc] initWithFrame:CGRectMake(105, kFrameSetBottom(line)+4, 90, 30)];
+        [tryagain setTitle:@"再来一次" forState:UIControlStateNormal];
+        [tryagain.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [tryagain setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+        [tryagain addTarget:self action:@selector(tryagainBtn:) forControlEvents:UIControlEventTouchUpInside];
+        tryagain.tag=index;
+        [oderview addSubview:tryagain];
+        
+        UIButton * pingjia = [[UIButton alloc] initWithFrame:CGRectMake(195, kFrameSetBottom(line)+4, 90, 30)];
+        [pingjia setTitle:@"服务评价" forState:UIControlStateNormal];
+        [pingjia.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [pingjia setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+        [pingjia addTarget:self action:@selector(orderMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
+        pingjia.tag=index;
+        [oderview addSubview:pingjia];
+        
+    }else
+    {
+        UIButton * payBtn = [[UIButton alloc] initWithFrame:CGRectMake(100, kFrameSetBottom(line)+4, 100, 30)];
+        [payBtn setImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
+        [payBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [payBtn setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
+        [payBtn addTarget:self action:@selector(payBtn:) forControlEvents:UIControlEventTouchUpInside];
+        payBtn.tag=index;
+        [oderview addSubview:payBtn];
+    }
     
-    UIButton * orderMessage = [[UIButton alloc] initWithFrame:CGRectMake(15, kFrameSetBottom(line)+4, 90, 30)];
-    [orderMessage setTitle:@"订单详情" forState:UIControlStateNormal];
-    [orderMessage.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [orderMessage setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
-    [orderMessage addTarget:self action:@selector(orderMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
-    orderMessage.tag=index;
-    [oderview addSubview:orderMessage];
+   
     
-    UIButton * tryagain = [[UIButton alloc] initWithFrame:CGRectMake(105, kFrameSetBottom(line)+4, 90, 30)];
-    [tryagain setTitle:@"再来一次" forState:UIControlStateNormal];
-    [tryagain.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [tryagain setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
-    [tryagain addTarget:self action:@selector(tryagainBtn:) forControlEvents:UIControlEventTouchUpInside];
-    tryagain.tag=index;
-    [oderview addSubview:tryagain];
-    
-    UIButton * pingjia = [[UIButton alloc] initWithFrame:CGRectMake(195, kFrameSetBottom(line)+4, 90, 30)];
-    [pingjia setTitle:@"服务评价" forState:UIControlStateNormal];
-    [pingjia.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [pingjia setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
-    [pingjia addTarget:self action:@selector(pingjiaBtn:) forControlEvents:UIControlEventTouchUpInside];
-    pingjia.tag=index;
-    [oderview addSubview:pingjia];
-    
-//    UIButton * payBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, kFrameSetBottom(line)+4, 100, 30)];
-////    [payBtn setTitle:@"订单详情" forState:UIControlStateNormal];
-//    [payBtn setImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
-//    [payBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
-//    [payBtn setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
-//    [payBtn addTarget:self action:@selector(orderMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    payBtn.tag=index;
-//    [oderview addSubview:payBtn];
+
     
     
     [_bottomScorllView setContentSize:CGSizeMake(kFrameW(_bottomScorllView), kFrameSetBottom(oderview)+10)];
+}
+-(void)payBtn:(UIButton*)btn
+{
+    OrderSuccessViewController * ordersuccessview=[OrderSuccessViewController alloc];
+    ordersuccessview.data=[_orderList objectAtIndex:btn.tag];
+    ordersuccessview = [ordersuccessview init];
+    [self.navigationController pushViewController:ordersuccessview animated:YES];
 }
 -(void)orderMessageBtn:(UIButton*)btn
 {
@@ -375,6 +390,7 @@
 -(void)tryagainBtn:(UIButton*)btn
 {
     //点击再来一次
+    
 }
 -(void)pingjiaBtn:(UIButton*)btn
 {
@@ -388,18 +404,16 @@
     }
     else
     {
-        NSArray * list = [dic objectForKey:@"order_list"];
+        NSArray * list = [dic objectForKey:@"result"];
         for (int i=0; i<list.count; i++)
         {
-            OrderData * orderdata=[OrderData itemFormDic:[list objectAtIndex:i]];
+            OrderData * orderdata=[OrderData itemFormOrderListDic:[list objectAtIndex:i]];
             [_orderList addObject:orderdata];
             [self addOrderListView:orderdata index:i];
             
         }
-        
         [SVProgressHUD dismiss];
         
-//        [self.tableView reloadData];
     }
 }
 
