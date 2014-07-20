@@ -25,6 +25,8 @@
 @property(nonatomic, copy) NSString * uid;
 @property(nonatomic, copy) NSString * evaluation;
 @property(nonatomic, copy) NSString * e_time;
+@property(nonatomic, copy) NSString * balance;
+
 
 + (id )itemFormOrderListDic:(NSDictionary *)dic;
 + (id )itemFormOrderSuccessDic:(NSDictionary *)dic;

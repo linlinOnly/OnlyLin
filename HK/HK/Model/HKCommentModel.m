@@ -34,8 +34,6 @@
     //好评测试
     NSString *token = [[NSString alloc] init];
     token = [FrontHelper tokenController:@"order" action:@"comment"];
-    
-//    NSLog(@"%@",token);
     NSURL *url = [[NSURL alloc] initWithString:@"http://www.niuhome.com/appapi/order/comment"];
     
     ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];

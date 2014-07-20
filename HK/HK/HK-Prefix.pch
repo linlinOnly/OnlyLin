@@ -30,3 +30,6 @@
 #define kFrameY(view) view.frame.origin.y
 #define kFrameSetRight(view) view.frame.size.width+view.frame.origin.x
 #define kFrameSetBottom(view) view.frame.size.height+view.frame.origin.y
+
+
+#define kUMengAppKey @"53cb266e56240bbd9a068b79"

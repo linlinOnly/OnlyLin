@@ -50,6 +50,8 @@
 
             _rightButton = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
             self.navigationItem.rightBarButtonItem = _rightButton;
+            [_listModel sendPostToServer];
+            
         }
         [self.navigationItem setRightBarButtonItem:_rightButton];
 
@@ -59,7 +61,8 @@
 {
     [FrontHelper logout];
     HKLoginViewController *loginCV = [[HKLoginViewController alloc] init];
-    [self presentViewController:loginCV animated:YES completion:nil];
+    HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:loginCV];
+    [self presentViewController:theNav animated:YES completion:nil];
     
 }
 -(void)toLoginPage
@@ -72,10 +75,10 @@
 }
 - (void)viewDidLoad
 {
-//    if (![FrontHelper checkLogin]) {
-//        HKLoginViewController *loginController = [[HKLoginViewController alloc] init];
-//        [self.navigationController pushViewController:loginController animated:YES];
-//    }
+#warning 设置默认选中立即下单.
+    //     
+    
+
     
     _orderList = [[NSMutableArray alloc] init];
     [super viewDidLoad];
@@ -84,9 +87,6 @@
     _listModel.delegate = self;
     _itemModel = [[HKOrderItemModel alloc] init];
     
-    
-    
-    
     //余额视图
     HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, 10, 300, 40) title:@"账户余额" titleimagename:@"yuer"];
     [self.view addSubview:balanceview];
@@ -94,9 +94,10 @@
     balanceviewright.image=[UIImage imageNamed:@"arrow"];
     [balanceview addSubview:balanceviewright];
     
+    
+    
     _balancelabel=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 160, 40)];
     _balancelabel.textColor=kColorFromRGB(0xff8533);
-//    [_balancelabel setBackgroundColor:[UIColor redColor]];
     _balancelabel.textAlignment=NSTextAlignmentRight;
     _balancelabel.text=@"0";
     [balanceview addSubview:_balancelabel];
@@ -108,6 +109,13 @@
     [homeAddressright setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
     [homeAddressright addTarget:self action:@selector(homeAddressrightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [homeAddressview addSubview:homeAddressright];
+    
+    _addressTfd=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 160, 40)];
+    _addressTfd.textColor=kColorFromRGB(0x666666);
+    _addressTfd.textAlignment=NSTextAlignmentRight;
+    _addressTfd.text=@"0";
+    [homeAddressview addSubview:_addressTfd];
+    
    
     
     //我的订单视图
@@ -128,14 +136,9 @@
     [self.view addSubview:_bottomScorllView];
     
     
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.backgroundColor =[UIColor whiteColor];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UserASI * user=[[UserASI alloc]init];
+    user.delegate=self;
+    [user postUserModel];
     
     
 }
@@ -145,7 +148,6 @@
     [UIView animateWithDuration:.3 animations:^{
         _bottomScorllView.alpha=_bottomScorllView.alpha==1?0:1;
     }];
-   
 }
 -(void)homeAddressrightBtnClick:(UIButton*)Btn
 {
@@ -154,94 +156,13 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [_listModel sendPostToServer];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-//#pragma mark - Table view data source
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 1;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return [_orderList count];
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-//{
-//    
-//    switch ([[[_orderList objectAtIndex:indexPath.row] objectForKey:@"order_status"] intValue])
-//    {
-//        case 0:
-//            return 105.0;
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    
-//    return 140.0;
-//}
-//
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"OrderCell";
-//    OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    
-//    static NSString *ExtCellIdentifier = @"OrderCellExt";
-//    OrderExtCell *extCell = [tableView dequeueReusableCellWithIdentifier:ExtCellIdentifier];
-//    
-//    
-//    [_itemModel fillItembyDic:[_orderList objectAtIndex:indexPath.row]];
-//    
-////    NSLog(@"item Model  %@",[_orderList objectAtIndex:indexPath.row]);
-//    
-//    switch (_itemModel.order_status)
-//    {
-//        case 0:
-//        {
-//            if (cell == nil) {
-//                cell = [[OrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//            }
-//            [cell fillWithItemModel:_itemModel];
-//            return cell;
-//        }
-//            break;
-//            
-//        default:
-//        {            
-//            if (extCell == nil) {
-//                extCell =[[OrderExtCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExtCellIdentifier];
-//            }
-//            [extCell fillWithItemModel:_itemModel];
-//            [extCell.infoView.againBtn addTarget:self action:@selector(jumpToStart) forControlEvents:UIControlEventTouchUpInside];
-//            return extCell;
-//        }
-//            break;
-//    }
-//
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [self postToServer:[FrontHelper getLoginInfo] order:[[_orderList objectAtIndex:indexPath.row] objectForKey:@"order_id"]];
-//}
-//
-//
 -(void)orderDetailRequestFinish:(NSDictionary *)dic
 {
 //    NSLog(@"orderList %@",dic);
@@ -364,12 +285,6 @@
         payBtn.tag=index;
         [oderview addSubview:payBtn];
     }
-    
-   
-    
-
-    
-    
     [_bottomScorllView setContentSize:CGSizeMake(kFrameW(_bottomScorllView), kFrameSetBottom(oderview)+10)];
 }
 -(void)payBtn:(UIButton*)btn
@@ -384,126 +299,63 @@
     //点击订单详情
     OdMessageViewController * messageview=[OdMessageViewController alloc];
     messageview.data=[_orderList objectAtIndex:btn.tag];
-    [messageview init];
+    messageview=[messageview init];
     [self.navigationController pushViewController:messageview animated:YES];
 }
 -(void)tryagainBtn:(UIButton*)btn
 {
     //点击再来一次
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectXiaDan" object:self];
     
-}
--(void)pingjiaBtn:(UIButton*)btn
-{
-    //点击服务评价
 }
 -(void)sendOrderListFinish:(NSDictionary *)dic
 {
     
-    if ([[dic objectForKey:@"code"] intValue] != 108) {
+    if ([[dic objectForKey:@"code"] intValue] != 108)
+    {
         [SVProgressHUD dismissWithError:@"获取订单列表出错"];
     }
     else
     {
         NSArray * list = [dic objectForKey:@"result"];
+        for (UIView * pView in _bottomScorllView.subviews) {
+            NSLog(@"%s%@",__func__,pView);
+            if ([pView isKindOfClass:[HKRoundCornerView class]]) {
+                [pView removeFromSuperview];
+            }
+            
+        }
+        _bottomheight_int=10;
+        [_orderList removeAllObjects];
+        
         for (int i=0; i<list.count; i++)
         {
+//            [_bottomScorllView rem]
+            
             OrderData * orderdata=[OrderData itemFormOrderListDic:[list objectAtIndex:i]];
             [_orderList addObject:orderdata];
             [self addOrderListView:orderdata index:i];
-            
         }
         [SVProgressHUD dismiss];
-        
     }
 }
-
--(void)postToServer:(NSString *)mobile order:(NSString *)orderId
+-(void)finishuser:(NSDictionary *)dic
 {
-    NSString *token = [[NSString alloc] init];
-    //订单详情
-    token = [FrontHelper tokenController:@"order" action:@"view"];
-   
-    
-    NSURL *url = [[NSURL alloc] initWithString:@"http://www.niuhome.com/appapi/order/view"];
-    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
-    
-    [request addPostValue:mobile forKey:@"mobile"];
-    [request addPostValue:orderId forKey:@"order_id"];
-    [request addPostValue:token forKey:@"token"];
-    [request setRequestMethod:@"POST"];
-    [request setDelegate:self];
-    [request setTag:100000];
-    if ([FrontHelper getNetStatus] == 0) {
-        [SVProgressHUD showErrorWithStatus_custom:@"无网络连接" duration:1.0];
-        return;
-    }
-    [request startAsynchronous];
-    
-    
-}
-
-- (void)requestStarted:(ASIHTTPRequest *)request
-{
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [SVProgressHUD showWithStatus:@"订单查询中..." maskType:SVProgressHUDMaskTypeClear];
-    
-}
-
-- (void)request:(ASIHTTPRequest *)request didReceiveResponseHeaders:(NSDictionary *)responseHeaders
-{
-    
-    //    NSLog(@"heads %@",responseHeaders);
-    
-}
-
-- (void)request:(ASIHTTPRequest *)request willRedirectToURL:(NSURL *)newURL
-{
-    
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-   
-    
-    [SVProgressHUD dismiss];
-    
-    NSError *err;
-    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingAllowFragments error:&err];
-    
-//     NSLog(@"%@",jsonDic);
-    
-    HKOrderDetailInfoModel *im = [[HKOrderDetailInfoModel alloc] initWithDic:jsonDic];
-    
-    if (im.order_status) {
-        _detailVC = [[HKorderDetailTableController alloc] initWithStyle:UITableViewStylePlain andDic:jsonDic];
-        
-        [self.navigationController pushViewController:_detailVC animated:YES];
+    if ([[dic objectForKey:@"code"] intValue] != 108)
+    {
+        [SVProgressHUD dismissWithError:@"获取余额出错"];
     }
     else
     {
-        _detail2VC = [[HKOrderDetail2TableViewController alloc] initWithStyle:UITableViewStylePlain andDic:jsonDic];
-        
-        [self.navigationController pushViewController:_detail2VC animated:YES];
+        _addressTfd.text=[[dic objectForKey:@"user"] objectForKey:@"address"];
+        _balancelabel.text=[[dic objectForKey:@"user"] objectForKey:@"balance"];
     }
+
     
-
 }
-
-- (void)requestFailed:(ASIHTTPRequest *)request
+-(void)logFailed
 {
-    NSLog(@"failed");
-    [SVProgressHUD dismissWithError:@"获取订单信息失败"];
-}
-
-- (void)requestRedirected:(ASIHTTPRequest *)request
-{
-    NSLog(@"redirected,%@",request.postBody);
-}
-
-
--(void)jumpToStart
-{
-    [self.tabBarController setSelectedIndex:0];
+    [SVProgressHUD dismissWithError:@"获取余额失败"];
 }
 
 

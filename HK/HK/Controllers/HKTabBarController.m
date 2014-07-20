@@ -25,52 +25,70 @@
     self = [super init];
     if (self) {
         
-        self.currentSelectedIndex = -1;
-        
-        _userNavi = [[HKNavigationController alloc] init];
-        StartViewController *startVC = [[StartViewController alloc] init];
-        
-        UITabBarItem *orderItem=[[UITabBarItem alloc]initWithTitle:@"立即下单" image:[UIImage imageNamed:@"tabbar_order.png"] tag:0];
-        _userNavi.tabBarItem=orderItem;
-        [_userNavi addChildViewController:startVC];
-        
-        
-        _mainNavi = [[HKNavigationController alloc] init];
-        HKMainTableViewController *mainTable = [[HKMainTableViewController alloc] init];
-        
-        UITabBarItem *userItem=[[UITabBarItem alloc]initWithTitle:@"个人中心" image:[UIImage imageNamed:@"tabbar_user.png"] tag:1];
-        _mainNavi.tabBarItem=userItem;        
-        [_mainNavi addChildViewController:mainTable];
-        _mainNavi.tabBarItem.tag = 1;
-        
-        
-        _infoNavi = [[HKNavigationController alloc] init];
-        HKInfoTableViewController *infoTable = [[HKInfoTableViewController alloc] init];
-        
-        
-        UITabBarItem *introItem = [[UITabBarItem alloc]initWithTitle:@"服务介绍" image:[UIImage imageNamed:@"tabbar_intro.png"] tag:2];
-        _infoNavi.tabBarItem = introItem;
-        
-        [_infoNavi addChildViewController:infoTable];
-        
-        UIViewController *vc = [[UIViewController alloc] init];
-        
-        UITabBarItem *contactItem = [[UITabBarItem alloc]initWithTitle:@"联系客服" image:[UIImage imageNamed:@"tabbar_contact.png"] tag:3];
-        vc.tabBarItem = contactItem;
-        vc.tabBarItem.tag = 3;
-        
-        
-        [self addChildViewController:_userNavi];
-        [self addChildViewController:_mainNavi];
-        [self addChildViewController:_infoNavi];
-        [self addChildViewController:vc];
+  
     
     }
     return self;
 }
-- (void)viewDidAppear:(BOOL)animated{
+//- (void)viewDidAppear:(BOOL)animated{
+//    [self hideRealTabBar];
+//    [self customTabBar];
+//}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectXiaDan" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(selectXiaDan) name: @"selectXiaDan" object: nil];
+    
+#warning 设置默认选中立即下单.
+//     [[NSNotificationCenter defaultCenter] postNotificationName:@"selectXiaDan" object:self];
+    
+    self.currentSelectedIndex = -1;
+    
+    _userNavi = [[HKNavigationController alloc] init];
+    StartViewController *startVC = [[StartViewController alloc] init];
+    
+    UITabBarItem *orderItem=[[UITabBarItem alloc]initWithTitle:@"立即下单" image:[UIImage imageNamed:@"tabbar_order.png"] tag:0];
+    _userNavi.tabBarItem=orderItem;
+    [_userNavi addChildViewController:startVC];
+    
+    
+    _mainNavi = [[HKNavigationController alloc] init];
+    HKMainTableViewController *mainTable = [[HKMainTableViewController alloc] init];
+    
+    UITabBarItem *userItem=[[UITabBarItem alloc]initWithTitle:@"个人中心" image:[UIImage imageNamed:@"tabbar_user.png"] tag:1];
+    _mainNavi.tabBarItem=userItem;
+    [_mainNavi addChildViewController:mainTable];
+    _mainNavi.tabBarItem.tag = 1;
+    
+    
+    _infoNavi = [[HKNavigationController alloc] init];
+    HKInfoTableViewController *infoTable = [[HKInfoTableViewController alloc] init];
+    
+    
+    UITabBarItem *introItem = [[UITabBarItem alloc]initWithTitle:@"服务介绍" image:[UIImage imageNamed:@"tabbar_intro.png"] tag:2];
+    _infoNavi.tabBarItem = introItem;
+    
+    [_infoNavi addChildViewController:infoTable];
+    
+    UIViewController *vc = [[UIViewController alloc] init];
+    
+    UITabBarItem *contactItem = [[UITabBarItem alloc]initWithTitle:@"联系客服" image:[UIImage imageNamed:@"tabbar_contact.png"] tag:3];
+    vc.tabBarItem = contactItem;
+    vc.tabBarItem.tag = 3;
+    
+    
+    [self addChildViewController:_userNavi];
+    [self addChildViewController:_mainNavi];
+    [self addChildViewController:_infoNavi];
+    [self addChildViewController:vc];
+    
+    
     [self hideRealTabBar];
     [self customTabBar];
+
 }
 
 - (void)hideRealTabBar{
@@ -129,12 +147,6 @@
         return;
     }
     
-    
-    if (self.currentSelectedIndex == button.tag) {
-        return;
-    }
-
-    
     for (UIButton * pbtn in self.buttons) {
         
         if (button == pbtn) {
@@ -144,13 +156,25 @@
         }
     }
     
+    if (self.currentSelectedIndex == button.tag) {
+       
+        return;
+    }
+
     self.currentSelectedIndex = button.tag;
     self.selectedIndex = self.currentSelectedIndex;
-
-
     
 }
 
+- (void)selectXiaDan{
+    for (UIButton * pbtn in self.buttons) {
+        pbtn.selected = NO;
+    }
+    
+    ((UIButton*)self.buttons[0]).selected = YES;
+    self.currentSelectedIndex = 0;
+    self.selectedIndex = self.currentSelectedIndex;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -161,11 +185,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
+
 
 - (void)didReceiveMemoryWarning
 {

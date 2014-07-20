@@ -163,7 +163,9 @@
 
 -(void)returnView
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectXiaDan" object:self];
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 -(void)finishLogin:(NSDictionary *)dic

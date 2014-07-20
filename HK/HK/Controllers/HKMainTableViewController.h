@@ -23,9 +23,9 @@
 
 #import "ASIFormDataRequest.h"
 #import "SVProgressHUD.h"
+#import "UserASI.h"
 
-
-@interface HKMainTableViewController : UIViewController<HKOrderListModelDelegate,HKOrderDetailModelDelegate>
+@interface HKMainTableViewController : UIViewController<HKOrderListModelDelegate,HKOrderDetailModelDelegate,UserASIDelegate>
 @property (nonatomic,strong) UIBarButtonItem *rightButton;
 @property (nonatomic,strong) NSMutableArray*orderList;
 @property (nonatomic,strong) HKOrderListModel *listModel;
@@ -33,7 +33,7 @@
 @property (nonatomic,strong) HKorderDetailTableController  *detailVC;
 @property (nonatomic,strong) HKOrderDetail2TableViewController  *detail2VC;
 @property (nonatomic,strong) UILabel * balancelabel;
-@property (nonatomic,strong) UITextField * addressTfd;
+@property (nonatomic,strong) UILabel * addressTfd;
 @property (nonatomic,strong) UIScrollView *bottomScorllView;
 @property (nonatomic, assign) int bottomheight_int;
 

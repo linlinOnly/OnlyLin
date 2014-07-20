@@ -281,6 +281,7 @@
         ordersuccessview.data=[OrderData itemFormOrderSuccessDic:dic];
         ordersuccessview = [ordersuccessview init];
         [self.navigationController pushViewController:ordersuccessview animated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
         
     }
     

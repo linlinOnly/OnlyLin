@@ -115,10 +115,9 @@
 
 -(void)sendPostToServer
 {
-//    if (![self checkData]) {
-//        return;
-//    }
-    
+    if (![self checkData]) {
+        return;
+    }
     if ([FrontHelper getNetStatus] == 0) {
         [SVProgressHUD showErrorWithStatus_custom:@"无网络连接" duration:1.0];
         return;
@@ -154,18 +153,13 @@
     {
 
         NSString *date = [[NSString alloc] initWithString:[_serverDate substringToIndex:10]];
-        NSString *work_times =  [[NSString alloc] initWithString:[[self currentDefaultTime] substringFromIndex:11]];
+        NSString *work_times =  [[NSString alloc] initWithString:[_serverDate substringFromIndex:11]];
         [request addPostValue:date forKey:@"date"];
         [request addPostValue:work_times forKey:@"work_times"];
     }
     [request addPostValue:@"1" forKey:@"sex"];
     [request addPostValue:token forKey:@"token"];
     [request addPostValue:[FrontHelper getLoginUid] forKey:@"uid"];
-    
-    
-//    NSLog(@"%@",[FrontHelper getLoginUid]);
-//    NSLog(@"request %@",request);
-    
     [request setRequestMethod:@"POST"];
     [request setDelegate:self];
     [request setTag:10011];
@@ -195,28 +189,23 @@
 - (void)requestFinished:(ASIFormDataRequest *)request
 {
     NSLog(@"%@",request.responseString);
-    
-    if ([_delegate respondsToSelector:@selector(sendOrderFinish:)]) {
-    
+    if ([_delegate respondsToSelector:@selector(sendOrderFinish:)])
+    {
         SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
         NSMutableDictionary *dict = [jsonParser objectWithString:request.responseString];
-        NSLog(@"%@",dict);
-        
+
         NSError *err;
-//        NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:request.responseData options:NSJSONReadingAllowFragments error:&err];
-            if (err == nil||dict!= nil) {
-                
-                [_delegate sendOrderFinish:dict];
-            }
-            else
-            {
-//                [_delegate orderFailed];
-                [_delegate sendOrderFinish:dict];
-                
-                NSLog(@"error");
-            }
+        if (err == nil||dict!= nil)
+        {
+            
+            [_delegate sendOrderFinish:dict];
+        }
+        else
+        {
+            [_delegate orderFailed];
         }
     }
+}
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {

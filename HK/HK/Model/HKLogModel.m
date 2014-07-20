@@ -31,11 +31,7 @@
 -(void)postLogModel
 {
     NSString *token = [[NSString alloc] init];
-    token = [FrontHelper tokenController:@"payLog" action:@"index"];
-    
-    NSLog(@"token %@",token);//order_sn  uid
-    
-    
+    token = [FrontHelper tokenController:@"payLog" action:@"index"];    
     NSURL *url = [[NSURL alloc] initWithString:@"http://www.niuhome.com/appapi/payLog"];
     
     ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
@@ -44,7 +40,7 @@
     [request addPostValue:_uid forKey:@"uid"];
     
     
-    NSLog(@"%@,%@",_orderSN,_uid);
+//    NSLog(@"%@,%@",_orderSN,_uid);
     
     [request addPostValue:token forKey:@"token"];
     [request setRequestMethod:@"POST"];
@@ -61,7 +57,7 @@
 
 - (void)requestStarted:(ASIHTTPRequest *)request
 {
-    NSLog(@"start log");
+//    NSLog(@"start log");
 }
 
 - (void)request:(ASIHTTPRequest *)request didReceiveResponseHeaders:(NSDictionary *)responseHeaders

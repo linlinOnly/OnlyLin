@@ -107,7 +107,7 @@
     UILabel *label2r=[[UILabel alloc]initWithFrame:CGRectMake(kFrameSetRight(label2)+16,kFrameSetBottom(line2)+4, 160, 26)];
     label2r.textColor=kColorFromRGB(0x000000);
     label2r.font=[UIFont systemFontOfSize:11];
-    label2r.text=_data.reservetime;
+    label2r.text=_data.reservetime?_data.reservetime:@"";
     [bottomview addSubview:label2r];
     
     UILabel *line3 = [[UILabel alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(label2)+4, 300, 1)];
@@ -218,7 +218,7 @@
     balanceviewlabelr.textColor=[UIColor redColor];
     balanceviewlabelr.font=[UIFont systemFontOfSize:15];
     balanceviewlabelr.textAlignment=NSTextAlignmentCenter;
-    balanceviewlabelr.text=@"0";
+    balanceviewlabelr.text=_data.balance;
     [balanceview addSubview:balanceviewlabelr];
     
     
@@ -261,10 +261,12 @@
 //    
 //    [submitBtn setBackgroundImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
 //    [self.view addSubview:submitBtn];
+//    UserASI * user=[[UserASI alloc]initWith:_data.uid];
+//    user.delegate=self;
+//    [user postUserModel];
     
     
 }
-
 -(void)submitDataToServer:(UIButton*)btn
 {
     PayViewController * orderview=[[PayViewController alloc]init];

@@ -15,8 +15,9 @@
     self = [super init];
     if (self) {
         //
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"orderlist" object:nil];
         
-//        _user = [FrontHelper getLoginInfo];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(sendPostToServer) name: @"orderlist" object: nil];
         
     }
     return self;
@@ -38,8 +39,8 @@
     ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
     
     [request setStringEncoding:NSUTF8StringEncoding];
-//    
-    NSLog(@"useris = %@",_user);
+
+//    NSLog(@"useris = %@",_user);
     
     [request addPostValue:_user forKey:@"mobile"];
     [request addPostValue:token forKey:@"token"];
