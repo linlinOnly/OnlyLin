@@ -129,8 +129,16 @@
     
     _bottomheight_int=10;
     
-    _bottomScorllView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(oderview)+10, 320, self.view.frame.size.height)];
-    _bottomScorllView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    float p = 0;
+    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0))
+    {
+        p = 50;
+    }
+
+    
+    _bottomScorllView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kFrameSetBottom(oderview)+10, 320, self.view.frame.size.height-kFrameSetBottom(oderview)-10 -p)];
+    _bottomScorllView.autoresizingMask =UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleHeight;
+    
     [_bottomScorllView setBackgroundColor:[UIColor whiteColor]];
     [_bottomScorllView setContentSize:CGSizeMake(320, 540)];
     [self.view addSubview:_bottomScorllView];
