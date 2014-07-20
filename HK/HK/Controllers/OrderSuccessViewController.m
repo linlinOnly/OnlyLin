@@ -377,6 +377,9 @@
                 //验证签名成功，交易结果无篡改
                 
                 NSLog(@"hehe success");
+                ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
+                HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:ctrl];
+                [self presentViewController:theNav animated:YES completion:nil];
 			}
         }
         else

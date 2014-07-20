@@ -64,13 +64,13 @@
     loginView.contentMode = UIViewContentModeCenter;
     [self.view addSubview:loginView];
     
-    UIButton * zhifuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(loginView.frame)+20, self.view.frame.size.width, 40)];
+    UIButton * zhifuBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(loginView.frame)+20, self.view.frame.size.width, 30)];
     zhifuBtn.backgroundColor = [UIColor clearColor];
     
     [zhifuBtn setTitleColor:kColorFromRGB(0x755833) forState:UIControlStateNormal];
     [zhifuBtn setTitle:@" 支付成功" forState:UIControlStateNormal];
     [zhifuBtn setImage:[UIImage imageNamed:@"townpeople_c"] forState:UIControlStateNormal];
-    
+    zhifuBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:zhifuBtn];
     
     
