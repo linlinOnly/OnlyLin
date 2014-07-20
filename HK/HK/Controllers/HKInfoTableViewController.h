@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "InfoCell.h"
 #import "IntroductionViewController.h"
-#import "AboutViewController.h"
 
 @interface HKInfoTableViewController : UIViewController
 

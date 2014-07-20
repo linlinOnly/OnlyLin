@@ -249,7 +249,7 @@
     line.alpha=0.2;
     [oderview addSubview:line];
     
-    if (![orderdata.pay_status isEqualToString:@"1"])
+    if ([orderdata.pay_status isEqualToString:@"1"])
     {
         UIButton * orderMessage = [[UIButton alloc] initWithFrame:CGRectMake(15, kFrameSetBottom(line)+4, 90, 30)];
         [orderMessage setTitle:@"订单详情" forState:UIControlStateNormal];

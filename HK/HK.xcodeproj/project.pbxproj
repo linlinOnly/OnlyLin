@@ -155,6 +155,8 @@
 		F074E727197B5DFD000B71F7 /* UMSnsAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F074E707197B5DFD000B71F7 /* UMSnsAccountViewController.xib */; };
 		F074E728197B5DFD000B71F7 /* UMSShareListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F074E708197B5DFD000B71F7 /* UMSShareListController.xib */; };
 		F074E729197B5DFD000B71F7 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F074E709197B5DFD000B71F7 /* UMSocialSDKResourcesNew.bundle */; };
+		F074E735197B7953000B71F7 /* PayASI.m in Sources */ = {isa = PBXBuildFile; fileRef = F074E734197B7953000B71F7 /* PayASI.m */; };
+		F074E738197B818E000B71F7 /* ShangMenZFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F074E737197B818E000B71F7 /* ShangMenZFViewController.m */; };
 		F08420F01970275C007CC439 /* pic01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F08420EB1970275C007CC439 /* pic01@2x.png */; };
 		F08420F11970275C007CC439 /* pic02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F08420EC1970275C007CC439 /* pic02@2x.png */; };
 		F08420F21970275C007CC439 /* pic03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F08420ED1970275C007CC439 /* pic03@2x.png */; };
@@ -486,6 +488,10 @@
 		F074E708197B5DFD000B71F7 /* UMSShareListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSShareListController.xib; sourceTree = "<group>"; };
 		F074E709197B5DFD000B71F7 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
 		F074E70A197B5DFD000B71F7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
+		F074E733197B7953000B71F7 /* PayASI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayASI.h; path = Model/PayASI.h; sourceTree = "<group>"; };
+		F074E734197B7953000B71F7 /* PayASI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PayASI.m; path = Model/PayASI.m; sourceTree = "<group>"; };
+		F074E736197B818E000B71F7 /* ShangMenZFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShangMenZFViewController.h; sourceTree = "<group>"; };
+		F074E737197B818E000B71F7 /* ShangMenZFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShangMenZFViewController.m; sourceTree = "<group>"; };
 		F08420EB1970275C007CC439 /* pic01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic01@2x.png"; sourceTree = "<group>"; };
 		F08420EC1970275C007CC439 /* pic02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic02@2x.png"; sourceTree = "<group>"; };
 		F08420ED1970275C007CC439 /* pic03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic03@2x.png"; sourceTree = "<group>"; };
@@ -714,6 +720,8 @@
 				735EEA451977A29500EAF6E5 /* OdMessageViewController.m */,
 				A0698D2C191F860F00E4FBA3 /* HKOrderDetail2TableViewController.h */,
 				A0698D2D191F860F00E4FBA3 /* HKOrderDetail2TableViewController.m */,
+				F074E736197B818E000B71F7 /* ShangMenZFViewController.h */,
+				F074E737197B818E000B71F7 /* ShangMenZFViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1033,6 +1041,8 @@
 				A0A344F5194EFC9F00F6F5D8 /* HKLogModel.m */,
 				F0BB8C71197AB3E6003D0B90 /* UserASI.h */,
 				F0BB8C72197AB3E6003D0B90 /* UserASI.m */,
+				F074E733197B7953000B71F7 /* PayASI.h */,
+				F074E734197B7953000B71F7 /* PayASI.m */,
 				F0CB9D8B197807C600AAC2B1 /* OrderData.h */,
 				F0CB9D8C197807C600AAC2B1 /* OrderData.m */,
 			);
@@ -1265,6 +1275,7 @@
 				A0A7CE1A191A521000E22066 /* SVProgressHUD.m in Sources */,
 				A0A7D1D9194B024000A053CF /* SBJsonBase.m in Sources */,
 				A0A31FCF191BAE7000BF8659 /* HKCommentModel.m in Sources */,
+				F074E735197B7953000B71F7 /* PayASI.m in Sources */,
 				A0A8EA3A191396F200A57A9E /* InfoCell.m in Sources */,
 				A0A8EA521914B1DD00A57A9E /* HKLoginInfoModel.m in Sources */,
 				A0008619190D2E330036846F /* HKKeeperInfoView.m in Sources */,
@@ -1333,6 +1344,7 @@
 				A052A027190BD70400B2C3B2 /* HKRoundCornerTelView.m in Sources */,
 				A052A04E190CDF7400B2C3B2 /* ASIDownloadCache.m in Sources */,
 				F0CB9D8D197807C600AAC2B1 /* OrderData.m in Sources */,
+				F074E738197B818E000B71F7 /* ShangMenZFViewController.m in Sources */,
 				A0698D19191E2A1800E4FBA3 /* HKCommentTableViewCell.m in Sources */,
 				A0A8EA37191396B300A57A9E /* HKInfoTableViewController.m in Sources */,
 				A052A052190CDF7400B2C3B2 /* ASINetworkQueue.m in Sources */,

@@ -16,7 +16,8 @@
 #import "OrderData.h"
 
 #import "HKLogModel.h"
-@interface OrderSuccessViewController : UIViewController<HKLogModelDelegate>
+#import "PayASI.h"
+@interface OrderSuccessViewController : UIViewController<HKLogModelDelegate,PayASIDelegate>
 
 @property (nonatomic, strong) OrderData * data;
 @property (nonatomic,strong) UIScrollView *bottomScorllView;

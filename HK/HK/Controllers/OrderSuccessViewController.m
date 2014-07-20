@@ -9,6 +9,8 @@
 #import "OrderSuccessViewController.h"
 #import "HKRoundCornerView.h"
 #import "PayViewController.h"
+#import "ShangMenZFViewController.h"
+#import "HKNavigationController.h"
 @interface OrderSuccessViewController ()
 
 @end
@@ -254,18 +256,7 @@
     [netPayview addSubview:zhifubaoLab];
     
     [_bottomScorllView setContentSize:CGSizeMake(kFrameW(_bottomScorllView), kFrameSetBottom(netPayview)+20)];
-    
-//    UIButton *submitBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [submitBtn setFrame:CGRectMake(115, kFrameSetBottom(bottomview)+10, 110, 34)];
-//    [submitBtn addTarget:self action:@selector(submitDataToServer:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [submitBtn setBackgroundImage:[UIImage imageNamed:@"paybtn"] forState:UIControlStateNormal];
-//    [self.view addSubview:submitBtn];
-//    UserASI * user=[[UserASI alloc]initWith:_data.uid];
-//    user.delegate=self;
-//    [user postUserModel];
-    
-    
+
 }
 -(void)submitDataToServer:(UIButton*)btn
 {
@@ -298,15 +289,6 @@
 {
     [SVProgressHUD dismiss];
     [self payForOrder];
-    
-    //    if ([[dic objectForKey:@"code"] intValue] == 108) {
-    //        [SVProgressHUD dismiss];
-    ////        NSLog(@"...dic %@",dic);
-    //
-    //    }
-    //    else{
-    //        [SVProgressHUD showErrorWithStatus_custom:@"验证失败，无法支付" duration:1.0];
-    //    }
 }
 -(void)logFailed
 {
@@ -411,7 +393,27 @@
 -(void)btnshangmenClick:(UIButton*)btn
 {
     NSLog(@"点击上门付钱");
+    PayASI * payasi=[PayASI alloc];
+    payasi.order_id=_data.order_id;
+    payasi.delegate=self;
+    payasi=[payasi init];
+    [payasi postPayshangmenModel];
 }
-
+-(void)finishpay:(NSDictionary *)dic
+{
+    if ([[dic objectForKey:@"code"] intValue] != 108)
+    {
+        [SVProgressHUD showErrorWithStatus:@"上门支付失败"];
+    }else
+    {
+        [SVProgressHUD showSuccessWithStatus:@"上门支付成功"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
+        
+        ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
+        HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:ctrl];
+        [self presentViewController:theNav animated:YES completion:nil];
+    }
+    
+}
 
 @end
