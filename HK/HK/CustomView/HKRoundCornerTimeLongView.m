@@ -43,7 +43,7 @@
         _hour2.tag = 2;
         _hour3.tag = 3;
         _hour4.tag = 4;
-        _serverTimeLong = @"2";
+        _serverTimeLong = @"1";
         [_hour2 addTarget:self action:@selector(timeLong:) forControlEvents:UIControlEventTouchUpInside];
         [_hour3 addTarget:self action:@selector(timeLong:) forControlEvents:UIControlEventTouchUpInside];
         [_hour4 addTarget:self action:@selector(timeLong:) forControlEvents:UIControlEventTouchUpInside];
@@ -119,7 +119,7 @@
 }
 -(void)timeLong:(UIButton*)sender
 {
-    _serverTimeLong = [NSString stringWithFormat:@"%d",sender.tag];
+    _serverTimeLong = [NSString stringWithFormat:@"%d",sender.tag-1];
 
     switch (sender.tag) {
         case 2:

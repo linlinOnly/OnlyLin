@@ -95,7 +95,7 @@
     _codetf = [[UITextField alloc] initWithFrame:CGRectMake(50, 12, 150, 24)];
     [_codetf setPlaceholder:@"输入验证码"];
     _codetf.delegate=self;
-    _codetf.keyboardType = UIKeyboardTypeDefault;
+    _codetf.keyboardType = UIKeyboardTypeNumberPad;
     [tempass addSubview:_codetf];
     
     _codeBtn = [[UIButton alloc] initWithFrame:CGRectMake(190, 9, 80, 30)];
@@ -112,7 +112,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    float height = self.view.frame.size.height - CGRectGetMaxY(_loginBtn.frame);
+    float p = 70;
+    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0))
+    {
+        p = 0;
+    }
+    
+    float height = [[UIScreen mainScreen] bounds].size.height - CGRectGetMaxY(_loginBtn.frame) - p;
     
     height = height>216? 0: height-216;
     
