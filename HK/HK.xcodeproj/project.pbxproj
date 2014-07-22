@@ -1472,8 +1472,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
-				CODE_SIGN_IDENTITY = "iPhone Developer: yongsheng liu (24D459F86D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yongsheng liu (24D459F86D)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: luping shen (XKJ9D2MM8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: luping shen (XKJ9D2MM8G)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HK/UMeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1493,7 +1493,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "牛家帮";
-				PROVISIONING_PROFILE = "35579C33-04AB-4AB4-BA50-D26D89E6E414";
+				PROVISIONING_PROFILE = "9FBB71F3-33BC-40F8-A389-F425F97AF41C";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -1508,8 +1508,8 @@
 					armv6,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
-				CODE_SIGN_IDENTITY = "iPhone Developer: yongsheng liu (24D459F86D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yongsheng liu (24D459F86D)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: luping shen (8Z34CDGPVY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: luping shen (8Z34CDGPVY)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HK/UMeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1529,7 +1529,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "牛家帮";
-				PROVISIONING_PROFILE = "35579C33-04AB-4AB4-BA50-D26D89E6E414";
+				PROVISIONING_PROFILE = "8B1B9B9B-9741-4BE7-94E9-C68D89E455C1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
