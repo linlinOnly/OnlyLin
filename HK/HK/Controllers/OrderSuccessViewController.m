@@ -216,11 +216,16 @@
     HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(label8)+10, 300, 40) title:@"账户余额"];
     [_bottomScorllView addSubview:balanceview];
     
+    UIButton * btnbalance=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 300, 40)];
+    [btnbalance setBackgroundColor:[UIColor clearColor]];
+    [btnbalance addTarget:self action:@selector(btnyuerClick:) forControlEvents:UIControlEventTouchUpInside];
+    [balanceview addSubview:btnbalance];
+    
     UILabel *balanceviewlabelr=[[UILabel alloc]initWithFrame:CGRectMake(220,10, 80, 20)];
     balanceviewlabelr.textColor=[UIColor redColor];
     balanceviewlabelr.font=[UIFont systemFontOfSize:15];
     balanceviewlabelr.textAlignment=NSTextAlignmentCenter;
-    balanceviewlabelr.text=_data.balance;
+    balanceviewlabelr.text=_data.balance?_data.balance:@"0";
     [balanceview addSubview:balanceviewlabelr];
     
     
@@ -400,16 +405,32 @@
     payasi.order_id=_data.order_id;
     payasi.delegate=self;
     payasi=[payasi init];
-    [payasi postPayshangmenModel];
+    [payasi postPayshangmenModel:@"shangmen"];
 }
+-(void)btnyuerClick:(UIButton*)btn
+{
+    NSLog(@"余额付钱");
+    PayASI * payasi=[PayASI alloc];
+    payasi.order_id=_data.order_id;
+    payasi.delegate=self;
+    payasi=[payasi init];
+    [payasi postPayshangmenModel:@"balance"];
+}
+
 -(void)finishpay:(NSDictionary *)dic
 {
     if ([[dic objectForKey:@"code"] intValue] != 108)
     {
-        [SVProgressHUD showErrorWithStatus:@"上门支付失败"];
+        if ([[dic objectForKey:@"code"] intValue] == 115) {
+            [SVProgressHUD showErrorWithStatus:@"余额不足"];
+        }else
+        {
+            [SVProgressHUD showErrorWithStatus:@"支付失败"];
+        }
+        
     }else
     {
-        [SVProgressHUD showSuccessWithStatus:@"上门支付成功"];
+        [SVProgressHUD showSuccessWithStatus:@"支付成功"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
         
         ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];

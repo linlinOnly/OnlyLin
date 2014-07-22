@@ -356,7 +356,7 @@
     }
     else
     {
-        NSArray * addresss=[NSArray arrayWithObject:[dic objectForKey:@"address"]];
+        NSArray * addresss=[[NSArray alloc] initWithArray:[dic objectForKey:@"address"]];
         _addressTfd.text=addresss.count>0? [[addresss objectAtIndex:0] valueForKey:@"address"]:@"";
         _balancelabel.text=[[dic objectForKey:@"user"] objectForKey:@"balance"];
     }

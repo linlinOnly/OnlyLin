@@ -57,10 +57,10 @@
     HKRoundCornerView * payview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10,kFrameSetBottom(balanceview)+10, 300, 40) title:@"上门收费"];
     [self.view addSubview:payview];
     
-    UIButton * btnshangmen=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 300, 40)];
-    [btnshangmen setBackgroundColor:[UIColor clearColor]];
-    [btnshangmen addTarget:self action:@selector(btnshangmenClick:) forControlEvents:UIControlEventTouchUpInside];
-    [payview addSubview:btnshangmen];
+//    UIButton * btnshangmen=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 300, 40)];
+//    [btnshangmen setBackgroundColor:[UIColor clearColor]];
+//    [btnshangmen addTarget:self action:@selector(btnshangmenClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [payview addSubview:btnshangmen];
     
     
     //上门收费

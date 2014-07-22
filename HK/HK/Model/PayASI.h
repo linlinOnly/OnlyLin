@@ -26,5 +26,5 @@
 @property (nonatomic,strong) NSString *order_id;
 
 @property (nonatomic,assign) id<PayASIDelegate> delegate;
--(void)postPayshangmenModel;
+-(void)postPayshangmenModel:(NSString*)type;
 @end

@@ -21,15 +21,15 @@
 
 
 
--(void)postPayshangmenModel
+-(void)postPayshangmenModel:(NSString*)type//@"shangmen"
 {
     NSString *token = [[NSString alloc] init];
-    token = [FrontHelper tokenController:@"user" action:@"shangmen"];
+    token = [FrontHelper tokenController:@"user" action:@"otherPay"];
     NSURL *url = [[NSURL alloc] initWithString:@"http://www.niuhome.com/appapi/user/otherPay"];
     
     ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:url];
     [request addPostValue:[FrontHelper getLoginUid] forKey:@"uid"];
-    [request addPostValue:@"shangmen" forKey:@"type"];
+    [request addPostValue:type forKey:@"type"];
     [request addPostValue:_order_id forKey:@"order_id"];
     [request addPostValue:token forKey:@"token"];
     [request setRequestMethod:@"POST"];
