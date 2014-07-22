@@ -355,7 +355,7 @@
     }
     else
     {
-        _addressTfd.text=[[dic objectForKey:@"user"] objectForKey:@"address"];
+        _addressTfd.text=[dic objectForKey:@"address"];
         _balancelabel.text=[[dic objectForKey:@"user"] objectForKey:@"balance"];
     }
 

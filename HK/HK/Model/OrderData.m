@@ -22,7 +22,7 @@
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [formatter setDateFormat:@"YYYY-MM-dd HH:mm"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
-    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSinceReferenceDate:(int)[[OrderData objectForDic:dic withNullKey:@"result"] objectForKey:@"create_time"]];
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[[OrderData objectForDic:dic withNullKey:@"result"] objectForKey:@"create_time"] intValue]];
     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
     
     ordersuccess.create_time = confromTimespStr;
@@ -64,7 +64,7 @@
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [formatter setDateFormat:@"YYYY-MM-dd HH:mm"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
-    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:(int)[[dic valueForKey:@"order"] objectForKey:@"create_time"]];
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[[[dic valueForKey:@"order"] objectForKey:@"create_time"] intValue]];
     NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
     
     order.create_time = confromTimespStr;
