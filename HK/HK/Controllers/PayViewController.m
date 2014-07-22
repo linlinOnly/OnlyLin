@@ -76,6 +76,7 @@
     [zhifubaoBtn addTarget:self action:@selector(zhifubaoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [netPayview addSubview:zhifubaoBtn];
     
+    NSLog(@"%f",[[_dicdata valueForKey:@"total_fee"] floatValue]);
     UILabel * zhifubaoLab = [[UILabel alloc] initWithFrame:CGRectMake(kFrameSetRight(zhifubaoBtn)+5, kFrameSetBottom(line)+8, 120, 20)];
     [zhifubaoLab setText:@"支付宝收银台"];
     [zhifubaoLab setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:12]];
@@ -150,7 +151,7 @@
     
     //	order.amount = [NSString stringWithFormat:@"%.2f",[model.duration intValue]*50.0]; //商品价格
     
-    order.amount = [NSString stringWithFormat:@"%.2f",1*1.0];
+    order.amount = [NSString stringWithFormat:@"%.2f",[[_dicdata valueForKey:@"total_fee"] floatValue]];
 	order.notifyURL =  @"http://www.niuhome.com/AppAlipayNotify"; //回调URL
     //    order.notifyURL = @"http://www.niuhome.com/AlipayReturn";
 	
