@@ -112,6 +112,7 @@
     
     _addressTfd=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 160, 40)];
     _addressTfd.textColor=kColorFromRGB(0x666666);
+    _addressTfd.font=[UIFont systemFontOfSize:13];
     _addressTfd.textAlignment=NSTextAlignmentRight;
     _addressTfd.text=@"0";
     [homeAddressview addSubview:_addressTfd];
@@ -355,7 +356,7 @@
     }
     else
     {
-        _addressTfd.text=[dic objectForKey:@"address"];
+        _addressTfd.text=[[[dic objectForKey:@"address"] objectAtIndex:0] objectForKey:@"address"];
         _balancelabel.text=[[dic objectForKey:@"user"] objectForKey:@"balance"];
     }
 
