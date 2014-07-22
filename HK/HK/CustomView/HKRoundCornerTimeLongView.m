@@ -71,8 +71,10 @@
         _townpeopleLab.text=@"双人组合";
         _townpeopleLab.textColor=kColorFromRGB(0x755833);
         _townpeopleLab.font=[UIFont systemFontOfSize:14];
+        _townpeopleLab.userInteractionEnabled = YES;
         [self addSubview:_townpeopleLab];
-        
+        UITapGestureRecognizer * tap  = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(townpeopleBtnClick:)];
+        [_townpeopleLab addGestureRecognizer:tap];
         
         _lastLab=[[UILabel alloc]init];
         _lastLab.textColor=kColorFromRGB(0x666666);
@@ -86,9 +88,9 @@
     }
     return self;
 }
--(void)townpeopleBtnClick:(UIButton*)btn
+-(void)townpeopleBtnClick:(id)btn
 {
-    btn.selected=!btn.selected;
+    _townpeopleBtn.selected=!_townpeopleBtn.selected;
     _service_type=([_service_type isEqualToString:@"1"]?@"2":@"1");
     
 }
