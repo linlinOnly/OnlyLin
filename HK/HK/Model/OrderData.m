@@ -38,7 +38,7 @@
     
     ordersuccess.order_status =[order_statuss objectAtIndex: [[OrderData objectForDic:dic withNullKey:@"order_status"] intValue]];
     
-    ordersuccess.product_id=[NSString stringWithFormat:@"%@小时",[OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"result"] withNullKey:@"product_id"]];
+    ordersuccess.product_id=[NSString stringWithFormat:@"%d小时",[[OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"result"] withNullKey:@"product_id"] intValue]+1];
     
     ordersuccess.order_type = [OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"result"] withNullKey:@"order_type"];
     ordersuccess.service_type = [OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"result"] withNullKey:@"service_type"];
