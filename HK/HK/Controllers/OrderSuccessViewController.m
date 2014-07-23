@@ -386,6 +386,8 @@
                 ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
                 HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:ctrl];
                 [self presentViewController:theNav animated:YES completion:nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
 			}
         }
         else
