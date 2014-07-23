@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		735AF76519766CF600B94983 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735AF76419766CF600B94983 /* PayViewController.m */; };
 		735EEA461977A29500EAF6E5 /* OdMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 735EEA451977A29500EAF6E5 /* OdMessageViewController.m */; };
+		73A921F7197F6970000373F0 /* arrow_dpwn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73A921F6197F6970000373F0 /* arrow_dpwn@2x.png */; };
 		A0008619190D2E330036846F /* HKKeeperInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0008618190D2E330036846F /* HKKeeperInfoView.m */; };
 		A000861C190D2EB10036846F /* HKKeeperModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A000861B190D2EB10036846F /* HKKeeperModel.m */; };
 		A0008632190D394E0036846F /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A000861F190D394E0036846F /* MKAnnotationView+WebCache.m */; };
@@ -198,6 +199,7 @@
 		735AF76419766CF600B94983 /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PayViewController.m; path = Controllers/PayViewController.m; sourceTree = "<group>"; };
 		735EEA441977A29500EAF6E5 /* OdMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdMessageViewController.h; path = Controllers/OdMessageViewController.h; sourceTree = "<group>"; };
 		735EEA451977A29500EAF6E5 /* OdMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OdMessageViewController.m; path = Controllers/OdMessageViewController.m; sourceTree = "<group>"; };
+		73A921F6197F6970000373F0 /* arrow_dpwn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_dpwn@2x.png"; sourceTree = "<group>"; };
 		A0008617190D2E330036846F /* HKKeeperInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKKeeperInfoView.h; path = CustomView/HKKeeperInfoView.h; sourceTree = "<group>"; };
 		A0008618190D2E330036846F /* HKKeeperInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKKeeperInfoView.m; path = CustomView/HKKeeperInfoView.m; sourceTree = "<group>"; };
 		A000861A190D2EB10036846F /* HKKeeperModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKKeeperModel.h; path = Model/HKKeeperModel.h; sourceTree = "<group>"; };
@@ -837,6 +839,7 @@
 		A0A76CE4192231DE007E6C2C /* 图标.rar Folder */ = {
 			isa = PBXGroup;
 			children = (
+				73A921F6197F6970000373F0 /* arrow_dpwn@2x.png */,
 				F0BB8C7C197AD774003D0B90 /* status_finishm@2x.png */,
 				F0BB8C7D197AD774003D0B90 /* status_sentm@2x.png */,
 				F0BB8C6B197AAC94003D0B90 /* status_finish@2x.png */,
@@ -1241,6 +1244,7 @@
 				F0842105197039AC007CC439 /* people@2x.png in Resources */,
 				F050A5B119741E100048E568 /* login@2x.png in Resources */,
 				A0A7CE19191A521000E22066 /* SVProgressHUD.bundle in Resources */,
+				73A921F7197F6970000373F0 /* arrow_dpwn@2x.png in Resources */,
 				F0842102197039AC007CC439 /* clock1@2x.png in Resources */,
 				A0A97C09192F708900BAD815 /* price_intro.png in Resources */,
 				A0A76D07192231DE007E6C2C /* 3hour_b@2x.png in Resources */,
