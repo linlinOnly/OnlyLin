@@ -335,7 +335,7 @@
     //	order.amount = [NSString stringWithFormat:@"%.2f",[model.duration intValue]*50.0]; //商品价格
     
     NSString * pStr = [_data.total_fee stringByReplacingOccurrencesOfString:@"￥" withString:@""];
-    order.amount = [NSString stringWithFormat:@"%.2f",[pStr floatValue]];
+    order.amount = [NSString stringWithFormat:@"%.2f",0.01];//[pStr floatValue]
 	order.notifyURL =  @"http://www.niuhome.com/AppAlipayNotify"; //回调URL
     //    order.notifyURL = @"http://www.niuhome.com/AlipayReturn";
 	

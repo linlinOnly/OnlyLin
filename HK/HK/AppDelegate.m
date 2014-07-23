@@ -202,6 +202,8 @@ BMKMapManager* _mapManager;
                 
 //                NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"payReusltCode" object:nil userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"9000",@"payResultStatus", nil]];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
 			}
         }
         else
