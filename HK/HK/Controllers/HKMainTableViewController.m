@@ -90,13 +90,10 @@
     //余额视图
     HKRoundCornerView * balanceview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, 10, 300, 40) title:@"账户余额" titleimagename:@"yuer"];
     [self.view addSubview:balanceview];
-    UIImageView * balanceviewright=[[UIImageView alloc]initWithFrame:CGRectMake(270, 8, 25, 25)];
-    balanceviewright.image=[UIImage imageNamed:@"arrow"];
-    [balanceview addSubview:balanceviewright];
     
     
     
-    _balancelabel=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 160, 40)];
+    _balancelabel=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 180, 40)];
     _balancelabel.textColor=kColorFromRGB(0xff8533);
     _balancelabel.textAlignment=NSTextAlignmentRight;
     _balancelabel.text=@"0";
@@ -105,12 +102,8 @@
     //家庭住址视图
     HKRoundCornerView * homeAddressview=[[HKRoundCornerView alloc]initWithFrame:CGRectMake(10, kFrameSetBottom(balanceview)+10, 300, 40) title:@"家庭住址" titleimagename:@"home"];
     [self.view addSubview:homeAddressview];
-    UIButton * homeAddressright=[[UIButton alloc]initWithFrame:CGRectMake(270, 8, 25, 25)];
-    [homeAddressright setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
-    [homeAddressright addTarget:self action:@selector(homeAddressrightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [homeAddressview addSubview:homeAddressright];
     
-    _addressTfd=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 160, 40)];
+    _addressTfd=[[UILabel alloc]initWithFrame:CGRectMake(100, 0, 180, 40)];
     _addressTfd.textColor=kColorFromRGB(0x666666);
     _addressTfd.font=[UIFont systemFontOfSize:13];
     _addressTfd.textAlignment=NSTextAlignmentRight;
@@ -125,6 +118,7 @@
     
     UIButton * oderviewright=[[UIButton alloc]initWithFrame:CGRectMake(270, 8, 25, 25)];
     [oderviewright setImage:[UIImage imageNamed:@"arrow"] forState:UIControlStateNormal];
+    [oderviewright setImage:[UIImage imageNamed:@"arrow_dpwn"] forState:UIControlStateSelected];
     [oderviewright addTarget:self action:@selector(oderviewrightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [oderview addSubview:oderviewright];
     
@@ -157,10 +151,6 @@
     [UIView animateWithDuration:.3 animations:^{
         _bottomScorllView.alpha=_bottomScorllView.alpha==1?0:1;
     }];
-}
--(void)homeAddressrightBtnClick:(UIButton*)Btn
-{
-    
 }
 -(void)viewDidAppear:(BOOL)animated
 {

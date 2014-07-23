@@ -78,7 +78,7 @@
     order.order_sn = [OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"order"] withNullKey:@"order_sn"];
     order.order_status =[order_statuss objectAtIndex: [[OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"order"] withNullKey:@"order_status"] intValue]];
     
-    order.product_id=[NSString stringWithFormat:@"%@小时",[OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"order"] withNullKey:@"product_id"]];
+    order.product_id=[NSString stringWithFormat:@"%d小时",[[OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"order"] withNullKey:@"product_id"] intValue]+1];
     
     order.order_type =[OrderData objectForDic:[OrderData objectForDic:dic withNullKey:@"order"] withNullKey:@"order_type"];
     
