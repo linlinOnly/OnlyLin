@@ -402,6 +402,7 @@
 -(void)btnshangmenClick:(UIButton*)btn
 {
     NSLog(@"点击上门付钱");
+    [SVProgressHUD showWithStatus:@"正在支付……"];
     PayASI * payasi=[PayASI alloc];
     payasi.order_id=_data.order_id;
     payasi.delegate=self;
@@ -411,29 +412,36 @@
 -(void)btnyuerClick:(UIButton*)btn
 {
     NSLog(@"余额付钱");
+    [SVProgressHUD showWithStatus:@"正在支付……"];
+    
     PayASI * payasi=[PayASI alloc];
     payasi.order_id=_data.order_id;
     payasi.delegate=self;
     payasi=[payasi init];
     [payasi postPayshangmenModel:@"balance"];
 }
-
+-(void)disshud:(NSString*)statu time:(int)time
+{
+    
+}
 -(void)finishpay:(NSDictionary *)dic
 {
     if ([[dic objectForKey:@"code"] intValue] != 108)
     {
-        if ([[dic objectForKey:@"code"] intValue] == 115) {
-            [SVProgressHUD showErrorWithStatus:@"余额不足"];
+        if ([[dic objectForKey:@"code"] intValue] == 115)
+        {
+            [SVProgressHUD showErrorWithStatus:@"支付失败"];
         }else
         {
+            
             [SVProgressHUD showErrorWithStatus:@"支付失败"];
         }
         
     }else
     {
-        [SVProgressHUD showSuccessWithStatus:@"支付成功"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
         
+        [SVProgressHUD showSuccessWithStatus:@"支付成功"];
         ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
         HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:ctrl];
         [self presentViewController:theNav animated:YES completion:nil];

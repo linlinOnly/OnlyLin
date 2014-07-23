@@ -70,7 +70,6 @@
 + (void)showWithStatus:(NSString *)status {
     [[SVProgressHUD sharedView] showWithStatus:status maskType:SVProgressHUDMaskTypeGradient networkIndicator:NO];
 }
-
 + (void)showWithMaskType:(SVProgressHUDMaskType)maskType {
     [[SVProgressHUD sharedView] showWithStatus:nil maskType:maskType networkIndicator:NO];
 }

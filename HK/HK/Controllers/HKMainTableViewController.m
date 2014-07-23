@@ -121,6 +121,7 @@
     [oderviewright setImage:[UIImage imageNamed:@"arrow_dpwn"] forState:UIControlStateSelected];
     [oderviewright addTarget:self action:@selector(oderviewrightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [oderview addSubview:oderviewright];
+    oderviewright.selected=YES;
     
     _bottomheight_int=10;
     
