@@ -25,11 +25,7 @@
 #import "SVProgressHUD.h"
 #import "UserASI.h"
 
-@interface HKMainTableViewController : UIViewController<HKOrderListModelDelegate,HKOrderDetailModelDelegate,UserASIDelegate> {
-    
-    BOOL isReload;
-    
-}
+@interface HKMainTableViewController : UIViewController<HKOrderListModelDelegate,HKOrderDetailModelDelegate,UserASIDelegate>
 @property (nonatomic,strong) UIBarButtonItem *rightButton;
 @property (nonatomic,strong) NSMutableArray*orderList;
 @property (nonatomic,strong) HKOrderListModel *listModel;

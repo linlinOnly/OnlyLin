@@ -33,11 +33,6 @@
     }
     return self;
 }
-- (void)loadView {
-    [super loadView];
-    isReload = YES;
-    
-}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -56,17 +51,10 @@
 
             _rightButton = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
             self.navigationItem.rightBarButtonItem = _rightButton;
-//            [_listModel sendPostToServer];
+            [_listModel sendPostToServer];
             
         }
         [self.navigationItem setRightBarButtonItem:_rightButton];
-        
-        
-//        isReload :yes 刷新.no 不刷新
-        if (isReload)
-        {
-            [_listModel sendPostToServer];
-        }
 
     }
 }
@@ -162,6 +150,10 @@
 -(void)oderviewrightBtnClick:(UIButton*)Btn
 {
     Btn.selected=!Btn.selected;
+    if (Btn.selected)
+    {
+       [_listModel sendPostToServer];
+    }
     [UIView animateWithDuration:.3 animations:^{
         _bottomScorllView.alpha=_bottomScorllView.alpha==1?0:1;
     }];
@@ -330,7 +322,6 @@
     }
     else
     {
-        isReload = NO;
         NSArray * list = [dic objectForKey:@"result"];
         for (UIView * pView in _bottomScorllView.subviews) {
             NSLog(@"%s%@",__func__,pView);
@@ -367,10 +358,6 @@
 
     
 }
-//-(void)orderFailed
-//{
-//    isReload = NO;
-//}
 -(void)logFailed
 {
     [SVProgressHUD dismissWithError:@"获取余额失败"];
