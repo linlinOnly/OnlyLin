@@ -129,6 +129,7 @@
             [_hour2 setBackgroundImage:[UIImage imageNamed:@"2hour_b"] forState:UIControlStateNormal];
             [_hour3 setBackgroundImage:[UIImage imageNamed:@"3hour_g"] forState:UIControlStateNormal];
             [_hour4 setBackgroundImage:[UIImage imageNamed:@"4hour_g"] forState:UIControlStateNormal];
+             _legendlabel.text=@"建议面积为90平以下";
         }
             break;
         case 3:
@@ -136,6 +137,7 @@
             [_hour2 setBackgroundImage:[UIImage imageNamed:@"2hour_g"] forState:UIControlStateNormal];
             [_hour3 setBackgroundImage:[UIImage imageNamed:@"3hour_b"] forState:UIControlStateNormal];
             [_hour4 setBackgroundImage:[UIImage imageNamed:@"4hour_g"] forState:UIControlStateNormal];
+             _legendlabel.text=@"建议面积90-120平米";
         }
             break;
         case 4:
@@ -143,6 +145,7 @@
             [_hour2 setBackgroundImage:[UIImage imageNamed:@"2hour_g"] forState:UIControlStateNormal];
             [_hour3 setBackgroundImage:[UIImage imageNamed:@"3hour_g"] forState:UIControlStateNormal];
             [_hour4 setBackgroundImage:[UIImage imageNamed:@"4hour_b"] forState:UIControlStateNormal];
+             _legendlabel.text=@"建议面积120-140平米";
         }
             break;
             

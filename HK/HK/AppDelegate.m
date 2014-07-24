@@ -12,7 +12,7 @@
 #import "PartnerConfig.h"
 
 #import "UMSocial.h"
-
+#import "UMSocialWechatHandler.h"
 BMKMapManager* _mapManager;
 
 @implementation AppDelegate
@@ -21,7 +21,7 @@ BMKMapManager* _mapManager;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [UMSocialData setAppKey:kUMengAppKey];
-    
+    [UMSocialWechatHandler setWXAppId:kUMengWeiXinKey url:kUMengWeiXinUrl];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -73,8 +73,15 @@ BMKMapManager* _mapManager;
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UMSocialSnsService  applicationDidBecomeActive];
 }
-
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
+}
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -201,7 +208,7 @@ BMKMapManager* _mapManager;
                 NSLog(@"success");
                 
 //                NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"payReusltCode" object:nil userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"9000",@"payResultStatus", nil]];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"payReusltCode" object:nil userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"9000",@"payResultStatus", nil]];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
 			}
@@ -211,14 +218,18 @@ BMKMapManager* _mapManager;
             //交易失败
             
             NSLog(@"failed");
+            [SVProgressHUD showErrorWithStatus:@"支付失败"];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"payReusltCode" object:nil userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"payResultStatus", nil]];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"payReusltCode" object:nil userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"payResultStatus", nil]];
+            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
         }
     }
     else
     {
         //失败
         NSLog(@"failed 2");
+        [SVProgressHUD showErrorWithStatus:@"支付失败"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"payReusltCode" object:nil userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:@"0",@"payResultStatus", nil]];
     }
     

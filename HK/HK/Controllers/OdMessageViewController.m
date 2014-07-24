@@ -23,14 +23,13 @@
 #pragma mark - 分享
 - (void)rigthBar:(id)sender {
     
-    [UMSocialData defaultData].extConfig.tencentData.shareText = @"标题";
-    [UMSocialData defaultData].extConfig.sinaData.shareText = @"标题";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"牛家帮";
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:kUMengAppKey
                                       shareText:@"牛家帮，国内首家B2C品质电商家庭保洁企业，安全、快速、标准，让您体验不一样的新时代家庭保洁服务。点此链接下载“牛家帮”APP,http://t.cn/RPUlgDZ"
                                      shareImage:nil
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,
-                                                 UMShareToTencent,
+                                                 UMShareToTencent,UMShareToWechatSession,
                                                  nil]
                                        delegate:nil];
     

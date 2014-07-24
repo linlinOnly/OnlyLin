@@ -33,3 +33,10 @@
 
 
 #define kUMengAppKey @"53cb266e56240bbd9a068b79"
+#define kUMengWeiXinKey @""//微信添加的key
+#define kUMengWeiXinUrl @""//转发微信内容里面的链接,可有可无
+
+
+
+
+

@@ -432,7 +432,7 @@
     {
         if ([[dic objectForKey:@"code"] intValue] == 115)
         {
-            [SVProgressHUD showErrorWithStatus:@"支付失败"];
+            [SVProgressHUD showErrorWithStatus:@"余额不足"];
         }else
         {
             

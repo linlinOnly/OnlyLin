@@ -26,6 +26,9 @@
 
 -(void)sendPostToServer
 {
+    NSLog(@"支付");
+    
+    
     _user = [FrontHelper getLoginInfo];
     
     NSString *token = [[NSString alloc] init];

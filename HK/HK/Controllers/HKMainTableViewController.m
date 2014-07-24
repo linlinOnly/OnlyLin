@@ -33,6 +33,12 @@
     }
     return self;
 }
+- (void)loadView {
+    [super loadView];
+    isReload = YES;
+    
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     if (![FrontHelper checkLogin]) {
@@ -50,10 +56,17 @@
 
             _rightButton = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
             self.navigationItem.rightBarButtonItem = _rightButton;
-            [_listModel sendPostToServer];
+//            [_listModel sendPostToServer];
             
         }
         [self.navigationItem setRightBarButtonItem:_rightButton];
+        
+        
+//        isReload :yes 刷新.no 不刷新
+        if (isReload)
+        {
+            [_listModel sendPostToServer];
+        }
 
     }
 }
@@ -310,13 +323,14 @@
 }
 -(void)sendOrderListFinish:(NSDictionary *)dic
 {
-    
     if ([[dic objectForKey:@"code"] intValue] != 108)
     {
+        
         [SVProgressHUD dismissWithError:@"获取订单列表出错"];
     }
     else
     {
+        isReload = NO;
         NSArray * list = [dic objectForKey:@"result"];
         for (UIView * pView in _bottomScorllView.subviews) {
             NSLog(@"%s%@",__func__,pView);
@@ -330,8 +344,6 @@
         
         for (int i=0; i<list.count; i++)
         {
-//            [_bottomScorllView rem]
-            
             OrderData * orderdata=[OrderData itemFormOrderListDic:[list objectAtIndex:i]];
             [_orderList addObject:orderdata];
             [self addOrderListView:orderdata index:i];
@@ -343,6 +355,7 @@
 {
     if ([[dic objectForKey:@"code"] intValue] != 108)
     {
+        
         [SVProgressHUD dismissWithError:@"获取余额出错"];
     }
     else
@@ -354,6 +367,10 @@
 
     
 }
+//-(void)orderFailed
+//{
+//    isReload = NO;
+//}
 -(void)logFailed
 {
     [SVProgressHUD dismissWithError:@"获取余额失败"];
