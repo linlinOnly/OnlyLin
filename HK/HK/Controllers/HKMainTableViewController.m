@@ -33,7 +33,6 @@
     }
     return self;
 }
-
 -(void)viewWillAppear:(BOOL)animated
 {
     if (![FrontHelper checkLogin]) {
@@ -152,7 +151,7 @@
     Btn.selected=!Btn.selected;
     if (Btn.selected)
     {
-       [_listModel sendPostToServer];
+        [_listModel sendPostToServer];
     }
     [UIView animateWithDuration:.3 animations:^{
         _bottomScorllView.alpha=_bottomScorllView.alpha==1?0:1;
@@ -315,9 +314,9 @@
 }
 -(void)sendOrderListFinish:(NSDictionary *)dic
 {
+    
     if ([[dic objectForKey:@"code"] intValue] != 108)
     {
-        
         [SVProgressHUD dismissWithError:@"获取订单列表出错"];
     }
     else
@@ -335,6 +334,8 @@
         
         for (int i=0; i<list.count; i++)
         {
+//            [_bottomScorllView rem]
+            
             OrderData * orderdata=[OrderData itemFormOrderListDic:[list objectAtIndex:i]];
             [_orderList addObject:orderdata];
             [self addOrderListView:orderdata index:i];
@@ -346,7 +347,6 @@
 {
     if ([[dic objectForKey:@"code"] intValue] != 108)
     {
-        
         [SVProgressHUD dismissWithError:@"获取余额出错"];
     }
     else

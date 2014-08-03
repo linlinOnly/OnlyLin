@@ -210,6 +210,7 @@
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     NSLog(@"failed");
+     [_delegate orderFailed];
 }
 
 - (void)requestRedirected:(ASIHTTPRequest *)request

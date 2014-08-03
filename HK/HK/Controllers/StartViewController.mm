@@ -287,7 +287,12 @@
     
     else
     {
-        [SVProgressHUD dismissWithError:@"下单失败"];
+        NSString *str = [[NSString alloc] init];
+        
+        [dic objectForKey:@"error_msg"]?str = [dic objectForKey:@"error_msg"]:str = @"";
+        
+//        [SVProgressHUD dismissWithError:str];
+        [SVProgressHUD dismissWithError:str afterDelay:3.0];
     }
 
     

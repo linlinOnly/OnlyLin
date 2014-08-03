@@ -187,6 +187,8 @@
             [FrontHelper setLoginInfo:lf.mobile];
             [FrontHelper setLoginUid:lf.userId];
             [SVProgressHUD dismiss];
+            //[_listModel sendPostToServer];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
             break;

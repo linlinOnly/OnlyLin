@@ -62,6 +62,7 @@
     [request addPostValue:_telStr forKey:@"mobile"];
     [request addPostValue:_codeStr forKey:@"code"];
     [request addPostValue:token forKey:@"token"];
+    [request addPostValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] forKey:@"deviceToken"];
     [request setRequestMethod:@"POST"];
     [request setDelegate:self];
     [request setTag:10012];

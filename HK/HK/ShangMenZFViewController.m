@@ -52,7 +52,8 @@
 
 -(void)returnView
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)initUI {

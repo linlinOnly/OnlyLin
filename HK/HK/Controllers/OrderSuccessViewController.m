@@ -31,6 +31,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoSuccessPage) name:@"alipaySuccess" object:nil];
+    
+    
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.title = @"确认订单";
     UILabel *customLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
@@ -335,7 +342,7 @@
     //	order.amount = [NSString stringWithFormat:@"%.2f",[model.duration intValue]*50.0]; //商品价格
     
     NSString * pStr = [_data.total_fee stringByReplacingOccurrencesOfString:@"￥" withString:@""];
-    order.amount = [NSString stringWithFormat:@"%.2f",0.01];//[pStr floatValue]
+    order.amount = [NSString stringWithFormat:@"%.2f",[pStr floatValue]];//[pStr floatValue]
 	order.notifyURL =  @"http://www.niuhome.com/AppAlipayNotify"; //回调URL
     //    order.notifyURL = @"http://www.niuhome.com/AlipayReturn";
 	
@@ -383,11 +390,12 @@
                 //验证签名成功，交易结果无篡改
                 
                 NSLog(@"hehe success");
-                ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
-                HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:ctrl];
-                [self presentViewController:theNav animated:YES completion:nil];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
+//                ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
+//                HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:ctrl];
+//                [self presentViewController:theNav animated:YES completion:nil];
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
+                [self gotoSuccessPage];
 			}
         }
         else
@@ -441,14 +449,20 @@
         
     }else
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
-        
-        [SVProgressHUD showSuccessWithStatus:@"支付成功"];
-        ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
-        HKNavigationController * theNav = [[HKNavigationController alloc]initWithRootViewController:ctrl];
-        [self presentViewController:theNav animated:YES completion:nil];
+        [self gotoSuccessPage];
     }
     
+}
+
+-(void)gotoSuccessPage
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"orderlist" object:self];
+    
+//    [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+    [SVProgressHUD dismiss];
+    ShangMenZFViewController * ctrl = [[ShangMenZFViewController alloc]init];
+
+    [self.navigationController pushViewController:ctrl animated:YES  ];
 }
 
 @end
